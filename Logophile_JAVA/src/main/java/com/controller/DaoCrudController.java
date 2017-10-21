@@ -25,6 +25,8 @@ public class DaoCrudController {
     @Autowired
     Sql2oDao sql2oDao;
 	
+    // great example to follow: GET_ALL, GET, POST, PUT, DELTE_ALL, DELTE
+    // ref: http://websystique.com/spring-boot/spring-boot-rest-api-example/
 	@RequestMapping(value = "/select/{beanName}", method = RequestMethod.GET)
 	public String select(@PathVariable("beanName") String beanName
 						,@RequestParam Map<String,String> formParams
