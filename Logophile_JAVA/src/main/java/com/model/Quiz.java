@@ -29,7 +29,7 @@ public class Quiz extends Common{
     
     //@Temporal(TemporalType.DATE)
     //@Column(name = "CREATED_DATE")
-    protected Date createDate;
+    private Date createDate;
     
 	@JsonIgnore // to prevent infinite loop when parsing into json
     @ManyToOne(optional = false)

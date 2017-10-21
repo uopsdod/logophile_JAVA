@@ -28,7 +28,7 @@ public class QuizTypeOneChoiceItem extends Common{
     
     //@Temporal(TemporalType.DATE)
     //@Column(name = "CREATED_DATE")
-    protected Date createDate;
+    private Date createDate;
     
     private String description; // 注意: desc為sql關鍵字，不可以使用
     private Boolean isTheAns;

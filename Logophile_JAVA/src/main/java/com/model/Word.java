@@ -27,7 +27,7 @@ public class Word extends Common{
     
     //@Temporal(TemporalType.DATE)
     //@Column(name = "CREATED_DATE")
-    protected Date createDate;
+    private Date createDate;
     
 	private String spell; // 單字
 	private String soundSpell; // 英標

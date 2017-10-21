@@ -28,7 +28,7 @@ public class QuizTypeOneChoice extends Common{
     
     //@Temporal(TemporalType.DATE)
     //@Column(name = "CREATED_DATE")
-    protected Date createDate;
+    private Date createDate;
     
     private String description;
     
