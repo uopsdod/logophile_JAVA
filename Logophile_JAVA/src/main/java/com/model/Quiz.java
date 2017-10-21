@@ -34,9 +34,21 @@ public class Quiz extends Common{
 	@JsonIgnore // to prevent infinite loop when parsing into json
     @ManyToOne(optional = false)
     private Word wordId; // FK
+	
+	@JsonIgnore // to prevent infinite loop when parsing into json
+	@ManyToOne(optional = false)
+	private QuizGp quizGpId; // FK
 
     public Long getQuizId() {
 		return quizId;
+	}
+    
+	public QuizGp getQuizGpId() {
+		return quizGpId;
+	}
+
+	public void setQuizGpId(QuizGp quizGpId) {
+		this.quizGpId = quizGpId;
 	}
 
 	public void setQuizId(Long quizId) {
