@@ -1,4 +1,2 @@
-INSERT INTO "MEM" (MEM_ID, MEM_NAME, MEM_ACCOUNT, MEM_PWD, CREATED_DATE) VALUES(1, 'samTsai','sam', '1111' ,TO_DATE('2017-02-13', 'yyyy-mm-dd'));
-INSERT INTO "MEM" (MEM_ID, MEM_NAME, MEM_ACCOUNT, MEM_PWD, CREATED_DATE) VALUES(2, 'guest','guest', 'guest' ,TO_DATE('2000-01-01', 'yyyy-mm-dd'));
 
 
