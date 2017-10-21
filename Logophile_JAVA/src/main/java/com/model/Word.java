@@ -29,25 +29,49 @@ public class Word extends Common{
     //@Column(name = "CREATED_DATE")
     protected Date createDate;
     
-	private String wordSpell; // 單字
-	private String wordSoundSpell; // 英標
-//	private byte[] wordSound; // 發音
+	private String spell; // 單字
+	private String soundSpell; // 英標
+//	private byte[] sound; // 發音
 	
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "ratePic")
 //    private List<Rate> wordDefIdList;	// 英文定義ID
 	
-//    private List<Rate> wordDefIdList_zh;	// 中文定義ID
-//    private List<Rate> wordExIdList; // 例句ID
-//    private List<Rate> wordSynIdList;	// 同義詞ID
-//    private List<Rate> wordAsynIdList; // 反義詞ID
-//    private List<Rate> wordHelperPicIdList; // 圖片ID	
-//    private List<Rate> wordHelperSoundIdList;	// 聲音ID 
-
+//    private List<Rate> defIdList_zh;	// 中文定義ID
+//    private List<Rate> exIdList; // 例句ID
+//    private List<Rate> synIdList;	// 同義詞ID
+//    private List<Rate> synIdList; // 反義詞ID
+//    private List<Rate> helperPicIdList; // 圖片ID	
+//    private List<Rate> helperSoundIdList;	// 聲音ID 
+	
     public Word(Date createDate) {
         this.createDate = createDate;
     }
 
-    public Word() {
+    public Long getWordId() {
+		return wordId;
+	}
+
+	public void setWordId(Long wordId) {
+		this.wordId = wordId;
+	}
+
+	public String getSpell() {
+		return spell;
+	}
+
+	public void setSpell(String spell) {
+		this.spell = spell;
+	}
+
+	public String getSoundSpell() {
+		return soundSpell;
+	}
+
+	public void setSoundSpell(String soundSpell) {
+		this.soundSpell = soundSpell;
+	}
+
+	public Word() {
     }
     
 	public Date getCreateDate() {

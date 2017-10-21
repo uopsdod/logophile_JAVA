@@ -25,7 +25,7 @@ public class Quiz extends Common{
         strategy = "native"
     )
     Long quizId;
-    private String quizType; // QuizOneChoice
+    private String type; // QuizOneChoice
     
     //@Temporal(TemporalType.DATE)
     //@Column(name = "CREATED_DATE")
@@ -43,12 +43,12 @@ public class Quiz extends Common{
 		this.quizId = quizId;
 	}
 
-	public String getQuizType() {
-		return quizType;
+	public String getType() {
+		return type;
 	}
 
-	public void setQuizType(String quizType) {
-		this.quizType = quizType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Word getWordId() {

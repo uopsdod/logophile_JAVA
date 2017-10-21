@@ -28,7 +28,7 @@ public class WordGp extends Common{
     //@Column(name = "CREATED_DATE")
     protected Date createDate;
 
-	private String wordGpName;
+	private String name;
 
     public WordGp(Date createDate) {
         this.createDate = createDate;
@@ -44,15 +44,15 @@ public class WordGp extends Common{
 	public void setWordGpId(Long wordGpId) {
 		this.wordGpId = wordGpId;
 	}
-
-	public String getWordGpName() {
-		return wordGpName;
-	}
-
-	public void setWordGpName(String wordGpName) {
-		this.wordGpName = wordGpName;
-	}
     
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}

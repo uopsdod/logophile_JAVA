@@ -30,7 +30,7 @@ public class QuizTypeOneChoice extends Common{
     //@Column(name = "CREATED_DATE")
     protected Date createDate;
     
-    private String quizTypeOneChoiceDesc;
+    private String description;
     
 	@JsonIgnore // to prevent infinite loop when parsing into json
     @ManyToOne(optional = false)
@@ -47,12 +47,29 @@ public class QuizTypeOneChoice extends Common{
 		this.quizTypeOneChoiceId = quizTypeOneChoiceId;
 	}
 
-	public String getquizTypeOneChoiceDesc() {
-		return quizTypeOneChoiceDesc;
+
+	public Long getQuizTypeOneChoiceId() {
+		return quizTypeOneChoiceId;
 	}
 
-	public void setquizTypeOneChoiceDesc(String quizTypeOneChoiceDesc) {
-		this.quizTypeOneChoiceDesc = quizTypeOneChoiceDesc;
+	public void setQuizTypeOneChoiceId(Long quizTypeOneChoiceId) {
+		this.quizTypeOneChoiceId = quizTypeOneChoiceId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<QuizTypeOneChoiceItem> getOneChoiceList() {
+		return oneChoiceList;
+	}
+
+	public void setOneChoiceList(List<QuizTypeOneChoiceItem> oneChoiceList) {
+		this.oneChoiceList = oneChoiceList;
 	}
 
 	public Quiz getQuizId() {
