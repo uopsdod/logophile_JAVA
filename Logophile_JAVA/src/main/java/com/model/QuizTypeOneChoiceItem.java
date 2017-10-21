@@ -30,7 +30,7 @@ public class QuizTypeOneChoiceItem extends Common{
     //@Column(name = "CREATED_DATE")
     protected Date createDate;
     
-    private String quizTypeOneChoiceItemDesc;
+    private String description; // 注意: desc為sql關鍵字，不可以使用
     private Boolean isTheAns;
     
 	@JsonIgnore // to prevent infinite loop when parsing into json
@@ -45,13 +45,6 @@ public class QuizTypeOneChoiceItem extends Common{
 		this.quizTypeOneChoiceItemId = quizTypeOneChoiceItemId;
 	}
 
-	public String getquizTypeOneChoiceItemDesc() {
-		return quizTypeOneChoiceItemDesc;
-	}
-
-	public void setquizTypeOneChoiceItemDesc(String quizTypeOneChoiceItemDesc) {
-		this.quizTypeOneChoiceItemDesc = quizTypeOneChoiceItemDesc;
-	}
 
 	public Boolean getIsTheAns() {
 		return isTheAns;
@@ -70,12 +63,12 @@ public class QuizTypeOneChoiceItem extends Common{
 		this.quizTypeOneChoiceItemId = quizTypeOneChoiceItemId;
 	}
 
-	public String getQuizTypeOneChoiceItemDesc() {
-		return quizTypeOneChoiceItemDesc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setQuizTypeOneChoiceItemDesc(String quizTypeOneChoiceItemDesc) {
-		this.quizTypeOneChoiceItemDesc = quizTypeOneChoiceItemDesc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public QuizTypeOneChoice getQuizTypeOneChoiceId() {
