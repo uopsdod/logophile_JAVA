@@ -1,6 +1,7 @@
 package com.model.common;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,6 +12,16 @@ import java.util.List;
 public class Common {
 	private List<String> errorMsgs;
 	private String jwtStr;
+    //@Temporal(TemporalType.DATE)
+    //@Column(name = "CREATED_DATE")
+    protected Date createDate;
+    
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 	public List<String> getErrorMsgs() {
 		return errorMsgs;
 	}
