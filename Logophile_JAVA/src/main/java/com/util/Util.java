@@ -2,7 +2,9 @@ package com.util;
  
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +24,12 @@ public class Util {
 		Util.gson = aGson;
 		Util.getFileLogger().info("Util() end");
 	}	
+	
+	public static String getNowDateTimeStr() {
+		SimpleDateFormat sdf = new SimpleDateFormat( Util.getSdfDateTimeFormat());
+		String now = sdf.format(new java.util.Date());
+		return now;
+	}
 	
 	public static String getSdfDateFormat(){
 		return Attr.sdfDateFormat;
@@ -76,6 +84,15 @@ public class Util {
 			Util.getFileLogger().info("getExceptionMsg exception.getMessage(): " + exception.getMessage());
 		}
 	    return eMsg;
+	}
+	
+	public static boolean containsCaseInsensitive(String s, List<String> l) {
+		for (String string : l) {
+			if (string.equalsIgnoreCase(s)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static class Attr {

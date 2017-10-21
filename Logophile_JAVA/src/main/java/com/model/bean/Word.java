@@ -72,6 +72,7 @@ public class Word extends Common{
 	}
 
 	public Word() {
+		this.createDate = new java.util.Date();
     }
     
 	public Date getCreateDate() {

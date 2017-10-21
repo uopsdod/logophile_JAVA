@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.JsonObject;
+import com.model.Sql2oDao;
+import com.model.bean.Word;
 import com.util.RESTfulUtil;
 import com.util.Util;
 import com.util.MessageBrokerUtil;
@@ -28,12 +30,21 @@ public class SpringTestRunner implements CommandLineRunner{
 
     @Autowired
     DataSource dataSource;
+    
+    @Autowired
+    Sql2oDao sql2oDao;
 
     @Transactional(readOnly = true)
     @Override
     public void run(String... args) throws Exception {
 		Util.getConsoleLogger().info("TestSender - CommandLineRunner() called - 開始測試");
 		Util.getFileLogger().info("TestSender - CommandLineRunner() called - 開始測試");
+		
+		
+		/** sql & dao test **/
+		Word word = new Word();
+		String word_pk = sql2oDao.insert(word);
+		Util.getConsoleLogger().info("word_pk: " + word_pk);
 		
 //        System.out.println("DATASOURCE = " + dataSource);
 //        
