@@ -11,7 +11,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import com.google.gson.Gson;
-import com.model.pic.PicRepository;
 import com.util.Util;
 import com.util.MessageBrokerUtil;
 import com.util.storage.StorageProperties;
@@ -58,8 +57,8 @@ public class BeanGenerator {
 	 * @return
 	 */
 	@Bean(name="Util")
-	public Util util(Gson aGson, PicRepository picRepository){
-		Util util = new Util(aGson, picRepository);
+	public Util util(Gson aGson){
+		Util util = new Util(aGson);
 		return util;
 	}
 	

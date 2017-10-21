@@ -6,9 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.model.common.Common;
-import com.model.pic.Pic;
-import com.model.rate.Rate;
 
 import java.util.Date;
 import java.util.List;

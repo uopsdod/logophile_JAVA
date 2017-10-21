@@ -1,4 +1,4 @@
-package com.model;
+package com.model.config;
 
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.boot.model.naming.ImplicitJoinColumnNameSource;

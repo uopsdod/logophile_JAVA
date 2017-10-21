@@ -1,4 +1,4 @@
-package com.model;
+package com.model.config;
 
 import java.io.Serializable;
 import java.util.Locale;
