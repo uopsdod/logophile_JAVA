@@ -1,4 +1,4 @@
-package com.model;
+package com.model.bean;
 
 import javax.persistence.*;
 
@@ -11,56 +11,46 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Quiz extends Common{
+public class Word_WordGp extends Common{
 
 	// Why should not use the AUTO JPA GenerationType with MySQL and Hibernate:
     // https://vladmihalcea.com/2017/01/24/why-should-not-use-the-auto-jpa-generationtype-with-mysql-and-hibernate/
     @Id
     @GeneratedValue(
         strategy= GenerationType.AUTO, 
-        generator="quizId_native"
+        generator="word_WordGpId_native"
     )
     @GenericGenerator(
-        name = "quizId_native", 
+        name = "word_WordGpId_native", 
         strategy = "native"
     )
-    Long quizId;
-    private String type; // QuizOneChoice
+    Long word_WordGpId;
     
     //@Temporal(TemporalType.DATE)
     //@Column(name = "CREATED_DATE")
-    private Date createDate;
+    protected Date createDate;
     
 	@JsonIgnore // to prevent infinite loop when parsing into json
     @ManyToOne(optional = false)
     private Word wordId; // FK
 	
 	@JsonIgnore // to prevent infinite loop when parsing into json
-	@ManyToOne(optional = false)
-	private QuizGp quizGpId; // FK
+    @ManyToOne(optional = false)
+	private WordGp wordGpId; // FK
+	
+    public Word_WordGp(Date createDate) {
+        this.createDate = createDate;
+    }
 
-    public Long getQuizId() {
-		return quizId;
-	}
+    public Word_WordGp() {
+    }
     
-	public QuizGp getQuizGpId() {
-		return quizGpId;
+	public Long getWord_WordGpId() {
+		return word_WordGpId;
 	}
 
-	public void setQuizGpId(QuizGp quizGpId) {
-		this.quizGpId = quizGpId;
-	}
-
-	public void setQuizId(Long quizId) {
-		this.quizId = quizId;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setWord_WordGpId(Long word_WordGpId) {
+		this.word_WordGpId = word_WordGpId;
 	}
 
 	public Word getWordId() {
@@ -71,12 +61,13 @@ public class Quiz extends Common{
 		this.wordId = wordId;
 	}
 
-	public Quiz(Date createDate) {
-        this.createDate = createDate;
-    }
+	public WordGp getWordGpId() {
+		return wordGpId;
+	}
 
-    public Quiz() {
-    }
+	public void setWordGpId(WordGp wordGpId) {
+		this.wordGpId = wordGpId;
+	}
     
 	public Date getCreateDate() {
 		return createDate;

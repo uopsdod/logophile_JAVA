@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Common;
+import com.model.bean.Common;
 //import com.model.mem.Mem;
 //import com.model.mem.MemRepository;
 //import com.model.pic.Pic;
