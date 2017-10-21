@@ -9,16 +9,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.model.common.Common;
 import com.model.pic.Pic;
 
 @Entity
 public class Rate extends Common{
-    //http://www.oracle.com/technetwork/middleware/ias/id-generation-083058.html
+	// Why should not use the AUTO JPA GenerationType with MySQL and Hibernate:
+    // https://vladmihalcea.com/2017/01/24/why-should-not-use-the-auto-jpa-generationtype-with-mysql-and-hibernate/
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "RATE_SEQ")
-    @SequenceGenerator(sequenceName = "rate_seq", initialValue = 1, allocationSize = 1, name = "RATE_SEQ")
+    @GeneratedValue(
+        strategy= GenerationType.AUTO, 
+        generator="rateId_native"
+    )
+    @GenericGenerator(
+        name = "rateId_native", 
+        strategy = "native"
+    )
     Long rateId;
     
     private String rateResult;

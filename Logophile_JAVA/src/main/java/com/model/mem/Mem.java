@@ -3,6 +3,7 @@ package com.model.mem;
 import javax.persistence.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.model.common.Common;
 
@@ -11,10 +12,17 @@ import java.util.Date;
 @Entity
 public class Mem extends Common{
 
-    //http://www.oracle.com/technetwork/middleware/ias/id-generation-083058.html
+	// Why should not use the AUTO JPA GenerationType with MySQL and Hibernate:
+    // https://vladmihalcea.com/2017/01/24/why-should-not-use-the-auto-jpa-generationtype-with-mysql-and-hibernate/
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "MEM_SEQ")
-    @SequenceGenerator(sequenceName = "mem_seq", initialValue = 1, allocationSize = 1, name = "MEM_SEQ")
+    @GeneratedValue(
+        strategy= GenerationType.AUTO, 
+        generator="memId_native"
+    )
+    @GenericGenerator(
+        name = "memId_native", 
+        strategy = "native"
+    )
     Long memId;
 
 	private String memName;

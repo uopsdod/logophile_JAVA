@@ -17,6 +17,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,10 +26,17 @@ import com.model.rate.Rate;
 
 @Entity
 public class Pic extends Common{
-    //http://www.oracle.com/technetwork/middleware/ias/id-generation-083058.html
+	// Why should not use the AUTO JPA GenerationType with MySQL and Hibernate:
+    // https://vladmihalcea.com/2017/01/24/why-should-not-use-the-auto-jpa-generationtype-with-mysql-and-hibernate/
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PIC_SEQ")
-    @SequenceGenerator(sequenceName = "pic_seq", initialValue = 1, allocationSize = 1, name = "PIC_SEQ")
+    @GeneratedValue(
+        strategy= GenerationType.AUTO, 
+        generator="picId_native"
+    )
+    @GenericGenerator(
+        name = "picId_native", 
+        strategy = "native"
+    )
     Long picId;
     
 	private long rateNum;
