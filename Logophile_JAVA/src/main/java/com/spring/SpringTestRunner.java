@@ -42,9 +42,9 @@ public class SpringTestRunner implements CommandLineRunner{
 		
 		
 		/** sql & dao test **/
-		Word word = new Word();
-		String word_pk = sql2oDao.insert(word);
-		Util.getConsoleLogger().info("word_pk: " + word_pk);
+//		Word word = new Word();
+//		String word_pk = sql2oDao.insert(word);
+//		Util.getConsoleLogger().info("word_pk: " + word_pk);
 		
 //        System.out.println("DATASOURCE = " + dataSource);
 //        
