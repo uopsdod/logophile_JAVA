@@ -1,5 +1,7 @@
 package com.util;
  
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,6 +64,18 @@ public class Util {
 	}
 	public static void setGson(Gson gson) {
 		Util.gson = gson;
+	}
+	
+    
+	public static String getExceptionMsg(Throwable e){
+		String eMsg = null;
+		try(StringWriter trace = new StringWriter();){
+			e.printStackTrace(new PrintWriter(trace));
+			eMsg = trace.toString();
+		}catch(Exception exception){
+			Util.getFileLogger().info("getExceptionMsg exception.getMessage(): " + exception.getMessage());
+		}
+	    return eMsg;
 	}
 
 	private static class Attr {
