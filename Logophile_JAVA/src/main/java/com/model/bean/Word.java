@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Word extends Common{
+public class Word extends Common<Word>{
 
 	// Why should not use the AUTO JPA GenerationType with MySQL and Hibernate:
     // https://vladmihalcea.com/2017/01/24/why-should-not-use-the-auto-jpa-generationtype-with-mysql-and-hibernate/
@@ -72,7 +72,6 @@ public class Word extends Common{
 	}
 
 	public Word() {
-		this.createDate = new java.util.Date();
     }
     
 	public Date getCreateDate() {

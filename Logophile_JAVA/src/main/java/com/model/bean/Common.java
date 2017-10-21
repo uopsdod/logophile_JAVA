@@ -9,29 +9,33 @@ import java.util.List;
  * @author sam
  *
  */
-public class Common {
-	private List<String> errorMsgs;
-	private String jwtStr;
-
-	public List<String> getErrorMsgs() {
-		return errorMsgs;
-	}
-	protected Common(){
-		this.errorMsgs = new ArrayList<>();
-	}
-	
-	public void addError(String error){
-		this.errorMsgs.add(error);
-	}
-	public String getJwtStr() {
-		return jwtStr;
-	}
-	public void setJwtStr(String jwtStr) {
-		this.jwtStr = jwtStr;
-	}
-	public void setErrorMsgs(List<String> errorMsgs) {
-		this.errorMsgs = errorMsgs;
-	}
-	
+public class Common <T> {
+    transient Class<T> clazz = (Class<T>) this.getClass();
+//  protected ClassGenericReserver(Class<T> aClazz) {
+//      this.clazz = aClazz;
+//  }
+//	private List<String> errorMsgs;
+//	private String jwtStr;
+//
+//	public List<String> getErrorMsgs() {
+//		return errorMsgs;
+//	}
+//	protected Common(){
+//		this.errorMsgs = new ArrayList<>();
+//	}
+//	
+//	public void addError(String error){
+//		this.errorMsgs.add(error);
+//	}
+//	public String getJwtStr() {
+//		return jwtStr;
+//	}
+//	public void setJwtStr(String jwtStr) {
+//		this.jwtStr = jwtStr;
+//	}
+//	public void setErrorMsgs(List<String> errorMsgs) {
+//		this.errorMsgs = errorMsgs;
+//	}
+//	
 
 }

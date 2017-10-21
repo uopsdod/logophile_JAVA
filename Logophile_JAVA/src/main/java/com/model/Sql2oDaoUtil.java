@@ -16,6 +16,8 @@ import com.model.annotation.PrimaryKey;
 import com.util.Util;
 
 public class Sql2oDaoUtil {
+	public final static String BEAN_PKG = "com.model.bean";
+	
 	public static <T> String getSelectWhereSqlNew(T aObj){
 		StringBuilder sql_where = new StringBuilder();
 		Field[] fields = aObj.getClass().getDeclaredFields();

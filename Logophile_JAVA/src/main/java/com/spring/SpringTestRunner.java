@@ -41,10 +41,10 @@ public class SpringTestRunner implements CommandLineRunner{
 		Util.getFileLogger().info("TestSender - CommandLineRunner() called - 開始測試");
 		
 		
-		/** sql & dao test **/
-//		Word word = new Word();
-//		String word_pk = sql2oDao.insert(word);
-//		Util.getConsoleLogger().info("word_pk: " + word_pk);
+		/** sql & dao test - insert **/
+		Word word = new Word();
+		String word_pk = sql2oDao.insert(word);
+		Util.getConsoleLogger().info("word_pk: " + word_pk);
 		
 //        System.out.println("DATASOURCE = " + dataSource);
 //        
