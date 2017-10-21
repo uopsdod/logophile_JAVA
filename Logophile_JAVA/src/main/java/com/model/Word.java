@@ -41,17 +41,12 @@ public class Word extends Common{
 //    private List<Rate> wordHelperPicIdList; // 圖片ID	
 //    private List<Rate> wordHelperSoundIdList;	// 聲音ID 
 
-    //@Temporal(TemporalType.DATE)
-    //@Column(name = "CREATED_DATE")
-    Date createDate;
-
     public Word(Date createDate) {
         this.createDate = createDate;
     }
 
     public Word() {
     }
-    
     
     
 	@Override
