@@ -25,6 +25,7 @@ public class Quiz_QuizGp extends Common{
         strategy = "native"
     )
     Long quiz_QuizGpId;
+    private String skillLv; // probably will use enum afterwards : Master, Familiar, UnFamiliar, NeverSeen
     
     //@Temporal(TemporalType.DATE)
     //@Column(name = "CREATED_DATE")
@@ -37,6 +38,14 @@ public class Quiz_QuizGp extends Common{
 	@JsonIgnore // to prevent infinite loop when parsing into json
     @ManyToOne(optional = false)
 	private WordGp quizGpId; // FK
+
+	public String getSkillLv() {
+		return skillLv;
+	}
+
+	public void setSkillLv(String skillLv) {
+		this.skillLv = skillLv;
+	}
 
 	public Long getQuiz_QuizGpId() {
 		return quiz_QuizGpId;
