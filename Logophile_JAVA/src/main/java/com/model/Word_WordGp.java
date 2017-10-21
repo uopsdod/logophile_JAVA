@@ -29,6 +29,10 @@ public class Word_WordGp extends Common{
     )
     Long word_WordGpId;
     
+    //@Temporal(TemporalType.DATE)
+    //@Column(name = "CREATED_DATE")
+    protected Date createDate;
+    
 	@JsonIgnore // to prevent infinite loop when parsing into json
     @ManyToOne(optional = false)
     private Word wordId; // FK
@@ -67,7 +71,14 @@ public class Word_WordGp extends Common{
 	public void setWordGpId(WordGp wordGpId) {
 		this.wordGpId = wordGpId;
 	}
-
+    
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+    
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

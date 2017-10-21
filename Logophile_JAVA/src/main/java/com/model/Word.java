@@ -26,7 +26,11 @@ public class Word extends Common{
         strategy = "native"
     )
     Long wordId;
-
+    
+    //@Temporal(TemporalType.DATE)
+    //@Column(name = "CREATED_DATE")
+    protected Date createDate;
+    
 	private String wordSpell; // 單字
 	private String wordSoundSpell; // 英標
 //	private byte[] wordSound; // 發音
@@ -48,6 +52,12 @@ public class Word extends Common{
     public Word() {
     }
     
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
     
 	@Override
 	public String toString() {

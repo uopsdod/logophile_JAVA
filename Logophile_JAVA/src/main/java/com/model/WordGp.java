@@ -26,6 +26,10 @@ public class WordGp extends Common{
         strategy = "native"
     )
     Long wordGpId;
+    
+    //@Temporal(TemporalType.DATE)
+    //@Column(name = "CREATED_DATE")
+    protected Date createDate;
 
 	private String wordGpName;
 
@@ -51,7 +55,14 @@ public class WordGp extends Common{
 	public void setWordGpName(String wordGpName) {
 		this.wordGpName = wordGpName;
 	}
-
+    
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+    
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
