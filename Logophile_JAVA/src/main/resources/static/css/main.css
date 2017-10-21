@@ -1,0 +1,65 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bg {
+    /* The image used */
+/*     background-image: url("img/bg_stripe_dotline.jpg"); */
+/*     background-image: url("img/bg_dots.png"); */
+		background-image: url("../img/bg_stripes_texture.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.center {
+	margin: auto;
+	text-align: center;
+}
+
+.left {
+	margin: auto;
+	text-align: left;
+}
+
+/* .chatDialogue{ */
+/* 	max-height:100px; */
+/* } */
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+/* html, body {height: 100%;} */
+
+.chatmaxHeight
+{
+    height: 400px;
+}
+.logmaxHeight
+{
+    height: 470px;
+}​
+
+.hidden
+{
+	visibility: hidden;
+}
+form, table {
+     display:inline;
+     margin:0px;
+     padding:0px;
+}
+
+label {
+   cursor: pointer;
+   /* Style as you please, it will become the visible UI component. */
+}
