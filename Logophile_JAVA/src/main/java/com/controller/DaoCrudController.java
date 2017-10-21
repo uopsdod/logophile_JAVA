@@ -25,40 +25,28 @@ public class DaoCrudController {
     @Autowired
     Sql2oDao sql2oDao;
 	
-    // great example to follow: GET_ALL, GET, POST, PUT, DELTE_ALL, DELTE
-    // ref: http://websystique.com/spring-boot/spring-boot-rest-api-example/
+	// great example to follow: GET_ALL, GET, POST, PUT, DELTE_ALL, DELTE
+	// ref: http://websystique.com/spring-boot/spring-boot-rest-api-example/
 	@RequestMapping(value = "/select/{beanName}", method = RequestMethod.GET)
 	public String select(@PathVariable("beanName") String beanName
-						,@RequestParam Map<String,String> formParams
-						) {
+						,@RequestParam Map<String, String> formParams) {
 		Util.getConsoleLogger().info("select input starts");
 		Util.getConsoleLogger().info("select input beanName: " + beanName);
 		Util.getConsoleLogger().info("select input formParams: " + formParams);
-		
+
 		JSONArray resultJSONArray = new JSONArray();
-		
-		/** 拿取bean **/
+
+		/** get bean obj from formParams **/
 		Object formParamsObj = convertObjToBean(beanName, formParams);
-		
-		/** 進行sql findAll搜尋 **/
+
+		/** execute sql findAll command **/
 		List<Object> findAll = sql2oDao.findAll(formParamsObj);
-		
-		/** 轉成jsonArray作為response **/
+
+		/** convert bean list to jsonArray **/
 		resultJSONArray = new JSONArray(findAll);
-		
+
 		Util.getConsoleLogger().info("select input ends");
-//		return Response
-//				.status(200)
-//				.entity(resultJSONArray.toString())
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods",
-//						"POST, GET, PUT, UPDATE, OPTIONS")
-//				.header("Access-Control-Allow-Headers",
-//						"Content-Type, Accept, X-Requested-With").build();		
-//		
-//		
-//		
-	   return resultJSONArray.toString();
+		return resultJSONArray.toString();
 	}
 	
 	/** NOW **/
