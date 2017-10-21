@@ -25,9 +25,9 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
-import com.model.mem.Mem;
-import com.model.pic.Pic;
-import com.model.pic.PicRepository;
+//import com.model.mem.Mem;
+//import com.model.pic.Pic;
+//import com.model.pic.PicRepository;
 import com.util.Util;
 import com.util.FileUploadUtil;
 import com.util.MessageBrokerUtil;
@@ -37,8 +37,8 @@ import com.util.storage.StorageService;
 @Controller
 public class FileUploadController {
 	
-	@Autowired
-    PicRepository picRepository;
+//	@Autowired
+//    PicRepository picRepository;
 	
     private final StorageService storageService;
     private FileUploadUtil utilUploadFile;
@@ -74,17 +74,17 @@ public class FileUploadController {
         Util.getConsoleLogger().info("handleFileUpload() here02");
         
         /** 寫入DB **/
-		Pic pic = new Pic();
-		pic.setPicUrl(this.utilUploadFile.getFileUri());
-		pic.setPicFile(file.getBytes());
-		
-		pic = picRepository.save(pic);
+//		Pic pic = new Pic();
+//		pic.setPicUrl(this.utilUploadFile.getFileUri());
+//		pic.setPicFile(file.getBytes());
+//		
+//		pic = picRepository.save(pic);
 		
 		/** 紀錄當下照片(暫時作法,以後須修改) **/
-		FileUploadUtil.lastPic = pic;
+//		FileUploadUtil.lastPic = pic;
 		
 		/** 通知前端要更新畫面 **/
-    	this.utilWebOSocketMsgBroker.sendJsonToTopicSubcriber(MessageBrokerUtil.CHANNEL_fileUploaded, pic);
+//    	this.utilWebOSocketMsgBroker.sendJsonToTopicSubcriber(MessageBrokerUtil.CHANNEL_fileUploaded, pic);
         
         Util.getConsoleLogger().info("handleFileUpload() ends");
         return "redirect:/";

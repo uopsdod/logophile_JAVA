@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import com.controller.BasicController;
 import com.controller.FileUploadController;
-import com.model.pic.Pic;
+//import com.model.pic.Pic;
 import com.util.storage.StorageService;
 
 @Component
@@ -21,7 +21,7 @@ public class FileUploadUtil {
 	
 	// 暫時處理方式,以後可能會變
 //	public static String lastFileUrl = "";
-	public static Pic lastPic = new Pic();
+//	public static Pic lastPic = new Pic();
 
 	private final StorageService storageService;
 	

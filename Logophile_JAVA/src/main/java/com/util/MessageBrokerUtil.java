@@ -8,7 +8,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonObject;
-import com.model.mem.Mem;
+//import com.model.mem.Mem;
 
 public class MessageBrokerUtil {
 	
