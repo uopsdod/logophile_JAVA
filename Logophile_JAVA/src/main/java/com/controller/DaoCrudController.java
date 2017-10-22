@@ -27,7 +27,7 @@ public class DaoCrudController {
 	
 	// great example to follow: GET_ALL, GET, POST, PUT, DELTE_ALL, DELTE
 	// ref: http://websystique.com/spring-boot/spring-boot-rest-api-example/
-	@RequestMapping(value = "/select/{beanName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{beanName}", method = RequestMethod.GET)
 	public String select(@PathVariable("beanName") String beanName
 						,@RequestParam Map<String, String> formParams) {
 		Util.getConsoleLogger().info("select input starts");
@@ -51,38 +51,18 @@ public class DaoCrudController {
 	
 	/** NOW **/
 	
-//	public Response getResourceByBean(@PathParam("beanName") String beanName, MultivaluedMap<String, String> formParams) {
-//		Util.getFileLogger().info("getResource input starts");
-//		Util.getFileLogger().info("getResource input beanName: " + beanName);
-//		Util.getFileLogger().info("getResource input formParams: " + formParams);
-//		
-//		JSONArray resultJSONArray = new JSONArray();
-//		
-//		/** 拿取bean **/
-//		Object formParamsObj = convertObjToBean(beanName, formParams);
-//		
-//		/** 進行sql findAll搜尋 **/
-//		List<Object> findAll = Sql2oDao.findAll(formParamsObj);
-//		
-//		/** 轉成jsonArray作為response **/
-//		resultJSONArray = new JSONArray(findAll);
-//		
-//		return Response
-//				.status(200)
-//				.entity(resultJSONArray.toString())
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods",
-//						"POST, GET, PUT, UPDATE, OPTIONS")
-//				.header("Access-Control-Allow-Headers",
-//						"Content-Type, Accept, X-Requested-With").build();
-//
-//	}
+
 //	/**
 //	 * 
 //	 * @param beanName
 //	 * @param formParams
 //	 * @return
 //	 */
+//	@RequestMapping(value = "/insert/{beanName}", method = RequestMethod.POST)
+//	public String select(@PathVariable("beanName") String beanName
+//						,@RequestParam Map<String, String> formParams) {
+//	
+//	
 //	@POST
 //	@Consumes("application/x-www-form-urlencoded")
 //	@Path("/insertResource/{beanName}")
