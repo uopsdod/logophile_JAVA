@@ -88,12 +88,73 @@ public class DaoCrudController {
 	}
 	
 	
+	/**
+	 * 
+	 * @param beanName
+	 * @param formParams
+	 * @return
+	 */
+	@RequestMapping(value = "/crud/{beanName}", method = RequestMethod.PUT)
+	public String update(@PathVariable("beanName") String beanName
+						,@RequestParam Map<String, String> formParams){
+		Util.getConsoleLogger().info("update starts");
+		Util.getConsoleLogger().info("update input beanName: " + beanName);
+		Util.getConsoleLogger().info("update input formParams: " + formParams);
+
+		JSONObject jsonObj = new JSONObject();
+
+		/** get bean obj from formParams **/
+		Object formParamsObj = convertObjToBean(beanName, formParams);
+
+		/** execute sql findAll command **/
+		sql2oDao.update(formParamsObj);
+
+		Util.getConsoleLogger().info("update ends");
+		return jsonObj.toString();		
+	}
 //	/**
 //	 * 
 //	 * @param beanName
 //	 * @param formParams
 //	 * @return
 //	 */
+//	@POST
+//	@Consumes("application/x-www-form-urlencoded")
+//	@Path("/deleteResource/{beanName}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response deleteResourceByBean(@PathParam("beanName") String beanName, MultivaluedMap<String, String> formParams) {
+//		Util.getFileLogger().info("deleteResource input starts");
+//		Util.getFileLogger().info("deleteResource input beanName: " + beanName);
+//		Util.getFileLogger().info("deleteResource input formParams: " + formParams);
+//		
+//		JSONObject jsonObj = new JSONObject();
+//		
+//		/** 拿取bean **/
+//		Object formParamsObj = convertObjToBean(beanName, formParams);
+//		
+//		/** 進行sql delete **/
+//		Sql2oDao.delete(formParamsObj);
+//		
+//		Util.getFileLogger().info("deleteResource input ends");
+//		return Response
+//				.status(200)
+//				.entity(jsonObj.toString())
+//				.header("Access-Control-Allow-Origin", "*")
+//				.header("Access-Control-Allow-Methods",
+//						"POST, GET, PUT, UPDATE, OPTIONS")
+//						.header("Access-Control-Allow-Headers",
+//								"Content-Type, Accept, X-Requested-With").build();
+//		
+//	}
+//	
+//	private Object convertObjToBean(String beanName, MultivaluedMap<String, String> formParams){
+//		Map<String,String> formParamsMap = Util.convertMultiToRegularMap(formParams);
+//		return convertObjToBean(beanName, formParamsMap);
+//	}
+	
+	
+	
+	
 //	@POST
 //	@Consumes("application/x-www-form-urlencoded")
 //	@Path("/batchInsertResource/{beanName}")
@@ -146,81 +207,8 @@ public class DaoCrudController {
 //	/** data輸入範例:  
 //	 * beanList:[{callID: "#1209oskvajoasi", senderID:"100", recevierID:"wad12saocijawd", action:"login", tenantID:"9"},{callID: "9doiwj12ds", senderID:"200", recevierID:"12oascij209", action:"findagent", tenantID:"10"}]
 //	 */
-//	
-//	
-//	/**
-//	 * 
-//	 * @param beanName
-//	 * @param formParams
-//	 * @return
-//	 */
-//	@POST
-//	@Consumes("application/x-www-form-urlencoded")
-//	@Path("/updateResource/{beanName}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response updateResourceByBean(@PathParam("beanName") String beanName, MultivaluedMap<String, String> formParams) {
-//		Util.getFileLogger().info("updateResource input starts");
-//		Util.getFileLogger().info("updateResource input beanName: " + beanName);
-//		Util.getFileLogger().info("updateResource input formParams: " + formParams);
-//		
-//		JSONObject jsonObj = new JSONObject();
-//		
-//		/** 拿取bean **/
-//		Object formParamsObj = convertObjToBean(beanName, formParams);
-//		
-//		/** 進行sql update **/
-//		Sql2oDao.update(formParamsObj);
-//		
-//		Util.getFileLogger().info("updateResource input ends");
-//		return Response
-//				.status(200)
-//				.entity(jsonObj.toString())
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods",
-//						"POST, GET, PUT, UPDATE, OPTIONS")
-//						.header("Access-Control-Allow-Headers",
-//								"Content-Type, Accept, X-Requested-With").build();
-//	}
-//	
-//	/**
-//	 * 
-//	 * @param beanName
-//	 * @param formParams
-//	 * @return
-//	 */
-//	@POST
-//	@Consumes("application/x-www-form-urlencoded")
-//	@Path("/deleteResource/{beanName}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response deleteResourceByBean(@PathParam("beanName") String beanName, MultivaluedMap<String, String> formParams) {
-//		Util.getFileLogger().info("deleteResource input starts");
-//		Util.getFileLogger().info("deleteResource input beanName: " + beanName);
-//		Util.getFileLogger().info("deleteResource input formParams: " + formParams);
-//		
-//		JSONObject jsonObj = new JSONObject();
-//		
-//		/** 拿取bean **/
-//		Object formParamsObj = convertObjToBean(beanName, formParams);
-//		
-//		/** 進行sql delete **/
-//		Sql2oDao.delete(formParamsObj);
-//		
-//		Util.getFileLogger().info("deleteResource input ends");
-//		return Response
-//				.status(200)
-//				.entity(jsonObj.toString())
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods",
-//						"POST, GET, PUT, UPDATE, OPTIONS")
-//						.header("Access-Control-Allow-Headers",
-//								"Content-Type, Accept, X-Requested-With").build();
-//		
-//	}
-//	
-//	private Object convertObjToBean(String beanName, MultivaluedMap<String, String> formParams){
-//		Map<String,String> formParamsMap = Util.convertMultiToRegularMap(formParams);
-//		return convertObjToBean(beanName, formParamsMap);
-//	}
+		
+	
 	
 	private Object convertObjToBean(String beanName, Map<String,String> formParamsMap){
 		Object formParamsObj = null;
@@ -253,4 +241,5 @@ public class DaoCrudController {
 	}
 	
 	
+
 }
