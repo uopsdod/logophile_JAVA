@@ -13,7 +13,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.sql2o.Sql2o;
 
-import com.config.MyTomcatConnectorCustomizer;
 import com.google.gson.Gson;
 import com.model.Sql2oDao;
 import com.util.Util;
@@ -116,12 +115,6 @@ public class BeanGenerator {
 	Sql2oDao sql2oDao() {
 		Sql2oDao sql2oDao = new Sql2oDao(sql2o());
 		return sql2oDao;
-	}
-	
-	@Bean
-	MyTomcatConnectorCustomizer myTomcatConnectorCustomizer() {
-		MyTomcatConnectorCustomizer myTomcatConnectorCustomizer = new MyTomcatConnectorCustomizer();
-		return myTomcatConnectorCustomizer;
 	}
 	
 }
