@@ -87,41 +87,6 @@ public class DaoCrudController {
 		return jsonObj.toString();
 	}
 	
-//	
-//	@POST
-//	@Consumes("application/x-www-form-urlencoded")
-//	@Path("/insertResource/{beanName}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response insertResource(@PathParam("beanName") String beanName, MultivaluedMap<String, String> formParams) {
-//		Util.getFileLogger().info("insertResource input starts");
-//		Util.getFileLogger().info("insertResource input beanName: " + beanName);
-//		Util.getFileLogger().info("insertResource input formParams: " + formParams);
-//		Util.getConsoleLogger().info("insertResource input starts");
-//		Util.getConsoleLogger().info("insertResource input beanName: " + beanName);
-//		Util.getConsoleLogger().info("insertResource input formParams: " + formParams);
-//		
-//		JSONObject jsonObj = new JSONObject();
-//		
-//		/** 拿取bean **/
-//		Object formParamsObj = convertObjToBean(beanName, formParams);
-//		
-//		/** 進行sql insert搜尋 **/
-//		String primaryKey = Sql2oDao.insert(formParamsObj);
-//		
-//		/** 放入回傳值 **/
-//		jsonObj.put("primaryKey", primaryKey);
-//		
-//		Util.getFileLogger().info("insertResource input ends");
-//		return Response
-//				.status(200)
-//				.entity(jsonObj.toString())
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods",
-//						"POST, GET, PUT, UPDATE, OPTIONS")
-//						.header("Access-Control-Allow-Headers",
-//								"Content-Type, Accept, X-Requested-With").build();
-//	}
-//	
 	
 //	/**
 //	 * 
