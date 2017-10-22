@@ -248,12 +248,12 @@ public class Sql2oDaoUtil {
 		
 		/** 看有那些欄位需要當作搜尋值 **/
 		Field[] fields = aObj.getClass().getDeclaredFields();
-		Util.getConsoleLogger().info("update fields.length: " + fields.length);
+		Util.getConsoleLogger().info("delete fields.length: " + fields.length);
 		
 		for (Field f : fields){
 			f.setAccessible(true); // prevent from error of accessing "private" fields
 			if (f.isAnnotationPresent(PrimaryKey.class)) {
-				System.out.println("update PrimaryKey annotation is present");
+				System.out.println("delete PrimaryKey annotation is present");
 				sql_delete_where.append(f.getName() + " = :" + f.getName());
 			}
 		}// end of for (Field f : fields)

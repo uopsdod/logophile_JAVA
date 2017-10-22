@@ -121,41 +121,43 @@ public class DaoCrudController {
 		Util.getConsoleLogger().info("update ends");
 		return jsonObj.toString();		
 	}
-//	/**
-//	 * 
-//	 * @param beanName
-//	 * @param formParams
-//	 * @return
-//	 */
-//	@POST
-//	@Consumes("application/x-www-form-urlencoded")
-//	@Path("/deleteResource/{beanName}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response deleteResourceByBean(@PathParam("beanName") String beanName, MultivaluedMap<String, String> formParams) {
-//		Util.getFileLogger().info("deleteResource input starts");
-//		Util.getFileLogger().info("deleteResource input beanName: " + beanName);
-//		Util.getFileLogger().info("deleteResource input formParams: " + formParams);
-//		
-//		JSONObject jsonObj = new JSONObject();
-//		
-//		/** 拿取bean **/
-//		Object formParamsObj = convertObjToBean(beanName, formParams);
-//		
-//		/** 進行sql delete **/
-//		Sql2oDao.delete(formParamsObj);
-//		
-//		Util.getFileLogger().info("deleteResource input ends");
-//		return Response
-//				.status(200)
-//				.entity(jsonObj.toString())
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods",
-//						"POST, GET, PUT, UPDATE, OPTIONS")
-//						.header("Access-Control-Allow-Headers",
-//								"Content-Type, Accept, X-Requested-With").build();
-//		
-//	}
-//	
+	
+	
+	/**
+	 * 
+	 * @param beanName
+	 * @param formParams
+	 * @return
+	 */
+	@RequestMapping(value = "/crud/{beanName}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable("beanName") String beanName
+						,@RequestParam Map<String, String> formParams){
+		Util.getConsoleLogger().info("delete starts");
+		Util.getConsoleLogger().info("delete input beanName: " + beanName);
+		Util.getConsoleLogger().info("delete input formParams: " + formParams);
+
+		JSONObject jsonObj = new JSONObject();
+
+		/** get bean obj from formParams **/
+		Object formParamsObj = convertObjToBean(beanName, formParams);
+
+		/** execute sql findAll command **/
+		int rows = sql2oDao.delete(formParamsObj);
+		
+		/** 放入回傳值 **/
+		try {
+			jsonObj.put("rows", rows);
+		} catch (JSONException e) {
+			Util.getConsoleLogger().info(Util.getExceptionMsg(e));
+			Util.getFileLogger().info(Util.getExceptionMsg(e));
+		}
+		
+
+		Util.getConsoleLogger().info("delete ends");
+		return jsonObj.toString();		
+	}
+
+	//	
 //	private Object convertObjToBean(String beanName, MultivaluedMap<String, String> formParams){
 //		Map<String,String> formParamsMap = Util.convertMultiToRegularMap(formParams);
 //		return convertObjToBean(beanName, formParamsMap);

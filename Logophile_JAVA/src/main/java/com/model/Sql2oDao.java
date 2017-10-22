@@ -323,20 +323,25 @@ public class Sql2oDao {
 	}
 	
 	
-	public <T> void delete(T aObj){
-		delete(aObj.getClass().getSimpleName(), aObj);
+	public <T> int delete(T aObj){
+		return delete(aObj.getClass().getSimpleName(), aObj);
 	}
 	
-	public <T> void delete(String aTableName, T aObj){
+	public <T> int delete(String aTableName, T aObj){
+		int result = 0;
 		try(Connection con = sql2o.open()){
-			delete(con, aTableName, aObj);
+			result = delete(con, aTableName, aObj);
 		}catch(Exception e){
 			Util.getConsoleLogger().info("Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
 			Util.getFileLogger().info("Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));			
 		}
+		return result;
 	}
 	
-	public <T> void delete(Connection aCon, String aTableName, T aObj){
+	public <T> int delete(Connection aCon, String aTableName, T aObj){
+		
+		int result = 0;
+		
 		/** 拿到delete sql語句 **/
 		String sql_delete = Sql2oDaoUtil.getDeleteSqlNew(aCon, aTableName, aObj);
 	    Util.getConsoleLogger().info("delete sql_delete: " + sql_delete);
@@ -360,7 +365,7 @@ public class Sql2oDao {
 				}
 			}// end of for (Field f : fields)
 			
-			query.executeUpdate();
+			result = query.executeUpdate().getResult();
 		}catch (IllegalArgumentException | IllegalAccessException e) {
 		    Util.getConsoleLogger().info("delete Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
 			Util.getFileLogger().info("delete Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
@@ -368,6 +373,7 @@ public class Sql2oDao {
 		    Util.getConsoleLogger().info("delete Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
 			Util.getFileLogger().info("delete Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
 		}
+		return result;
 	}
 	
 	
