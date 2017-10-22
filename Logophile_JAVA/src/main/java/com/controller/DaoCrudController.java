@@ -28,7 +28,7 @@ public class DaoCrudController {
 	
 	// great example to follow: GET_ALL, GET, POST, PUT, DELTE_ALL, DELTE
 	// ref: http://websystique.com/spring-boot/spring-boot-rest-api-example/
-	@RequestMapping(value = "/{beanName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/crud/{beanName}", method = RequestMethod.GET)
 	public String select(@PathVariable("beanName") String beanName
 						,@RequestParam Map<String, String> formParams) {
 		Util.getConsoleLogger().info("select starts");
@@ -60,7 +60,7 @@ public class DaoCrudController {
 	 * @return
 	 * @throws JSONException 
 	 */
-	@RequestMapping(value = "/{beanName}", method = RequestMethod.POST)
+	@RequestMapping(value = "/crud/{beanName}", method = RequestMethod.POST)
 	public String insert(@PathVariable("beanName") String beanName
 						,@RequestParam Map<String, String> formParams){
 		Util.getConsoleLogger().info("insert starts");
