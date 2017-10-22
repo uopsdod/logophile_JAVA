@@ -111,7 +111,7 @@ public class DaoCrudController {
 		
 		/** 放入回傳值 **/
 		try {
-			jsonObj.put("rows", rows);
+			jsonObj.put("updated_rows", rows);
 		} catch (JSONException e) {
 			Util.getConsoleLogger().info(Util.getExceptionMsg(e));
 			Util.getFileLogger().info(Util.getExceptionMsg(e));
@@ -129,7 +129,8 @@ public class DaoCrudController {
 	 * @param formParams
 	 * @return
 	 */
-	@RequestMapping(value = "/crud/{beanName}", method = RequestMethod.DELETE)
+//	@RequestMapping(value = "/crud/{beanName}", method = RequestMethod.DELETE) // DELETE still cannot send body to server
+	@RequestMapping(value = "/crud/delete/{beanName}", method = RequestMethod.POST) // 過度時期 
 	public String delete(@PathVariable("beanName") String beanName
 						,@RequestParam Map<String, String> formParams){
 		Util.getConsoleLogger().info("delete starts");
@@ -146,7 +147,7 @@ public class DaoCrudController {
 		
 		/** 放入回傳值 **/
 		try {
-			jsonObj.put("rows", rows);
+			jsonObj.put("deleted_rows", rows);
 		} catch (JSONException e) {
 			Util.getConsoleLogger().info(Util.getExceptionMsg(e));
 			Util.getFileLogger().info(Util.getExceptionMsg(e));
