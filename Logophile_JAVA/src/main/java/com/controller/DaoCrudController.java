@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,7 @@ public class DaoCrudController {
 	@RequestMapping(value = "/{beanName}", method = RequestMethod.GET)
 	public String select(@PathVariable("beanName") String beanName
 						,@RequestParam Map<String, String> formParams) {
-		Util.getConsoleLogger().info("select input starts");
+		Util.getConsoleLogger().info("select starts");
 		Util.getConsoleLogger().info("select input beanName: " + beanName);
 		Util.getConsoleLogger().info("select input formParams: " + formParams);
 
@@ -52,16 +53,40 @@ public class DaoCrudController {
 	/** NOW **/
 	
 
-//	/**
-//	 * 
-//	 * @param beanName
-//	 * @param formParams
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/insert/{beanName}", method = RequestMethod.POST)
-//	public String select(@PathVariable("beanName") String beanName
-//						,@RequestParam Map<String, String> formParams) {
-//	
+	/**
+	 * 
+	 * @param beanName
+	 * @param formParams
+	 * @return
+	 * @throws JSONException 
+	 */
+	@RequestMapping(value = "/{beanName}", method = RequestMethod.POST)
+	public String insert(@PathVariable("beanName") String beanName
+						,@RequestParam Map<String, String> formParams){
+		Util.getConsoleLogger().info("insert starts");
+		Util.getConsoleLogger().info("insert input beanName: " + beanName);
+		Util.getConsoleLogger().info("insert input formParams: " + formParams);
+
+		JSONObject jsonObj = new JSONObject();
+
+		/** get bean obj from formParams **/
+		Object formParamsObj = convertObjToBean(beanName, formParams);
+
+		/** execute sql findAll command **/
+		String primaryKey = sql2oDao.insert(formParamsObj);
+
+		/** 放入回傳值 **/
+		try {
+			jsonObj.put("primaryKey", primaryKey);
+		} catch (JSONException e) {
+			Util.getConsoleLogger().info(Util.getExceptionMsg(e));
+			Util.getFileLogger().info(Util.getExceptionMsg(e));
+		}
+
+		Util.getConsoleLogger().info("insert ends");
+		return jsonObj.toString();
+	}
+	
 //	
 //	@POST
 //	@Consumes("application/x-www-form-urlencoded")
@@ -96,6 +121,8 @@ public class DaoCrudController {
 //						.header("Access-Control-Allow-Headers",
 //								"Content-Type, Accept, X-Requested-With").build();
 //	}
+//	
+	
 //	/**
 //	 * 
 //	 * @param beanName
