@@ -107,7 +107,16 @@ public class DaoCrudController {
 		Object formParamsObj = convertObjToBean(beanName, formParams);
 
 		/** execute sql findAll command **/
-		sql2oDao.update(formParamsObj);
+		int rows = sql2oDao.update(formParamsObj);
+		
+		/** 放入回傳值 **/
+		try {
+			jsonObj.put("rows", rows);
+		} catch (JSONException e) {
+			Util.getConsoleLogger().info(Util.getExceptionMsg(e));
+			Util.getFileLogger().info(Util.getExceptionMsg(e));
+		}
+		
 
 		Util.getConsoleLogger().info("update ends");
 		return jsonObj.toString();		

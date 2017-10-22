@@ -238,15 +238,17 @@ public class Sql2oDao {
 	 * 此方法會去抓取@PrimaryKey，判斷其PK為那些欄位，以作為搜尋欄位
 	 * @param aObj
 	 */
-	public <T> void update(T aObj){
+	public <T> int update(T aObj){
+		int result = 0;
 		try(Connection con = sql2o.open()){
-			update(con, aObj);
+			result = update(con, aObj);
 		}catch(Exception e){
 			Util.getConsoleLogger().info("Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
 			Util.getFileLogger().info("Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));			
 		}
+		return result;
 	}
-	public <T> void update(Connection aCon, T aObj){
+	public <T> int update(Connection aCon, T aObj){
 		List<String> searchList = new ArrayList<>();
 		/** 看有那些欄位需要當作搜尋值 **/
 		Field[] fields = aObj.getClass().getDeclaredFields();
@@ -261,26 +263,29 @@ public class Sql2oDao {
 			}
 		}// end of for (Field f : fields)
 		String[] pkAry = searchList.toArray(new String[0]);
-		update(aCon, aObj.getClass().getSimpleName(), aObj, pkAry);		
+		return update(aCon, aObj.getClass().getSimpleName(), aObj, pkAry);		
 	}
 	
 	/** 過度方法 **/
-	public <T> void update(String aTableName, T aObj, String... aPkAry){
+	public <T> int update(String aTableName, T aObj, String... aPkAry){
+		int result = 0;
 		try(Connection con = sql2o.open()){
-			update(con, aTableName, aObj, aPkAry);
+			result = update(con, aTableName, aObj, aPkAry);
 		}catch(Exception e){
 			Util.getConsoleLogger().info("Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
 			Util.getFileLogger().info("Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));			
 		}
+		return result;
 	}
 	
-	public <T> void update(Connection aCon, String aTableName, T aObj, String... aPkAry){
+	public <T> int update(Connection aCon, String aTableName, T aObj, String... aPkAry){
 		Object primaryKey = null;
 		String sql_update = Sql2oDaoUtil.getUpdateSetSqlNew(aCon, aTableName, aObj, aPkAry);
 	    Util.getConsoleLogger().info("update sql_update: " + sql_update);
 		Util.getFileLogger().info("update sql_update: " + sql_update);
 		Util.getConsoleLogger().info("update aPkAry.length: " + aPkAry.length);
 		
+		int result = 0;
 		List<String> pkList = Arrays.asList(aPkAry);
 		
 		try {
@@ -293,12 +298,12 @@ public class Sql2oDao {
 			
 			for (Field f : fields){
 				f.setAccessible(true); // prevent from error of accessing "private" fields
-				Util.getConsoleLogger().info("f.getName(): " + f.getName());
+				Util.getConsoleLogger().info("update f.getName(): " + f.getName());
 				
 				Object fObj;
 				fObj = f.get(aObj);
 				
-				Util.getConsoleLogger().info("fObj: " + fObj);
+				Util.getConsoleLogger().info("update fObj: " + fObj);
 				
 				// 若非pk,則放入set語句中
 				if (!Util.containsCaseInsensitive(f.getName(), pkList) && fObj != null){
@@ -309,11 +314,12 @@ public class Sql2oDao {
 				}
 			}
 			
-			query.executeUpdate();
+			result = query.executeUpdate().getResult(); 
 		}catch (IllegalArgumentException | IllegalAccessException e) {
-		    Util.getConsoleLogger().info("findAll Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
-			Util.getFileLogger().info("findAll Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
+		    Util.getConsoleLogger().info("update  Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
+			Util.getFileLogger().info("update  Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
 		}
+		return result;
 	}
 	
 	
