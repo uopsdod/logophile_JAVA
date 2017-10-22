@@ -5,6 +5,8 @@ import javax.persistence.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.model.annotation.PrimaryKey;
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +15,8 @@ public class WordGp extends Common{
 
 	// Why should not use the AUTO JPA GenerationType with MySQL and Hibernate:
     // https://vladmihalcea.com/2017/01/24/why-should-not-use-the-auto-jpa-generationtype-with-mysql-and-hibernate/
-    @Id
+	@PrimaryKey
+	@Id
     @GeneratedValue(
         strategy= GenerationType.AUTO, 
         generator="wordGpId_native"
