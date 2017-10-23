@@ -1,8 +1,13 @@
 package com.spring;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.sql.DataSource;
@@ -15,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.JsonObject;
 import com.model.Sql2oDao;
+import com.model.annotation.FieldNotForDaoSql;
 import com.model.bean.Word;
 import com.util.RESTfulUtil;
 import com.util.Util;
@@ -45,6 +51,10 @@ public class SpringTestRunner implements CommandLineRunner{
 		Word word = new Word();
 		String word_pk = sql2oDao.insert(word);
 		Util.getConsoleLogger().info("word_pk: " + word_pk);
+		
+		/** beanMap test **/
+		Map<String, Class<?>> beanMap = Util.getBeanMap();
+		Util.getConsoleLogger().info("beanMap: " + beanMap);
 		
 //        System.out.println("DATASOURCE = " + dataSource);
 //        

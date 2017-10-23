@@ -189,6 +189,13 @@
 <!-- 		    <version>20160810</version> -->
 		</dependency>
 		
+		<!-- scan the pkg -->
+		<!-- https://mvnrepository.com/artifact/io.github.lukehutch/fast-classpath-scanner -->
+		<dependency>
+		    <groupId>io.github.lukehutch</groupId>
+		    <artifactId>fast-classpath-scanner</artifactId>
+		    <version>LATEST</version>
+		</dependency>
 
 	</dependencies>
 

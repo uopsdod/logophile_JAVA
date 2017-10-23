@@ -1,17 +1,14 @@
 package com.controller;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.model.bean.Common;
 //import com.model.mem.Mem;
 //import com.model.mem.MemRepository;
@@ -35,45 +33,25 @@ import com.util.RESTfulUtil;
 import com.util.Util;
 
 @RestController
-public class RESTfulController {
-	public static final String TAG = "RESTfulController";
+public class BeanParamsListController {
+	public static final String TAG = "BeanParamsListController";
 	
-    @Autowired
-    DataSource dataSource;
-
-//    @Autowired
-//    MemRepository memRepository;
-//
-//    @Autowired
-//    PicRepository picRepository;
-//    
-//    @Autowired
-//    RateRepository rateRepository;
-
-    @Autowired
-    MessageBrokerUtil utilWebOSocketMsgBroker;
-    
-    @RequestMapping(value = "/getBeanFieldsMap", method = RequestMethod.GET)
-    public ResponseEntity<String> getBeanFieldsMap() {
-    	Util.getConsoleLogger().info("getBeanFieldsMap starts");
+	@RequestMapping(value = "/beanParamsList", method = RequestMethod.GET)
+    public String getBeanParamsList() {
+    	Util.getConsoleLogger().info(TAG + "/getBeanParamsList starts");
     	
-    	Map<String, List<String>> beanFieldsMap = Util.getBeanFieldsMap();
-    	String jsonStrOut = Util.getGson().toJson(beanFieldsMap);
+    	JsonObject jsonObj = new JsonObject();
     	
-    	Util.getConsoleLogger().info("getBeanFieldsMap output ");
-    	Util.getConsoleLogger().info("getBeanFieldsMap ends");
-//        return jsonStrOut;
+    	/** get the list of all beans' params **/
+    	Map<String, Object> beanMap = new HashMap<>();
+    	///////////// here ///////////////
     	
-    	// ref: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html
-    	URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
-		return ResponseEntity.created(location)
-							.contentType(MediaType.APPLICATION_JSON_UTF8) // specify we intend to return json format
-							.body(jsonStrOut)
-							;
+    	/** put it into the return jsonObj **/
+    	JsonElement beanMapJsonElmt = Util.getGson().toJsonTree(beanMap);
+    	jsonObj.add("beanMap", beanMapJsonElmt);
     	
-//    	ResponseEntity<String> responseEntity = new ResponseEntity<>(jsonStrOut, HttpStatus.OK);
-//    	responseEntity.getHeaders().add("Content-Type","application/json");
-//    	return responseEntity;
+    	Util.getConsoleLogger().info(TAG + "/getBeanParamsList ends");
+        return jsonObj.toString();
     }
     
 //    @PostMapping("/updatePic")
