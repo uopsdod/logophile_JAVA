@@ -98,11 +98,6 @@
 // 	var url_g = "${RESTful_protocol}://${RESTful_hostname}:${RESTful_port}/${RESTful_project}";
 	var url_g = "http://localhost:8089";
 	console.log("url_g: " + url_g);
-	
-	var sql = JSON.parse('{}');
-	sql.tblInteraction_agentToAgent = '{"fromUserID":"301", "toUserID":"308", "msg":"hey yo", "date":"2017-09-30 18:00:12.000", "entityTypeID":"1", "tenantID":"3"}';
-// 	'{"type":"message","userID":103,"text":"yo","sendto":"101","channel":"chat"}';
-	
 </script>
 
 <!-- Vue -->
@@ -144,10 +139,12 @@
 					<span>result</span>
 				</div>			
 			</div>
-			`
+			` // end of template
+			
 		,props: {
 			my_parent: {}
-		}
+		} // end of props 
+		
 	    ,data: function(){
 	    	return {
 	    		formParams : '{"dbid":"1"}'
@@ -157,7 +154,7 @@
 // 	    		,currQueryStr: 'key01=val01&key02=val02'
 	//     		,coupon_code : ''
 	    	}
-	    }	
+	    } // end of data
 		,mounted:function(){
 			console.log("this.my_parent.userID_agent: " + this.my_parent.userID_agent); // debug
 			this.formParams = sql[this.action_name];
@@ -165,7 +162,7 @@
 			// update beanFieldsMap
 			this.updateBeanFieldsMap();
 			
-		}
+		} // end of mounted
 		,methods: {
 			sendReq: function(action){
 				
@@ -292,7 +289,7 @@
 				console.log('Str: ' , Str);
 				$("#newform").html(Str); 
 			}// end of createForm
-		}
+		} // end of methods
 	});
 
     var app = new Vue({
