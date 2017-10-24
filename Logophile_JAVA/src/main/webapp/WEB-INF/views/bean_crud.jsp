@@ -47,8 +47,13 @@
 
 </style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<!-- jquery -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous">
+</script>
+<script type="text/javascript" src="js/jquery.serializejson.js"></script> <!-- must be put after jquery -->
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -68,10 +73,7 @@
 
 <script src="https://unpkg.com/vue"></script>
 
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div class="form-group col-sm-12">
@@ -111,7 +113,7 @@
 			`
 			<div class="col-sm-12 panel panel-default">
 				<div class="col-sm-1 panel panel-default nopadding">
-				<select class="form-control" id="beanSelector" v-on:change="getCurrBeanName">
+				<select class="form-control" id="beanSelector" v-on:change="createForm">
 			        <option>1</option>
 			        <option>2</option>
 			        <option>3</option>
@@ -151,7 +153,8 @@
 	    		formParams : '{"dbid":"1"}'
 	    		,response: '{}'
 	    		,beanFieldsMap: '{"beanName":["f01","f02"]}'
-	    		,currQueryStr: 'key01=val01&key02=val02'
+	    		,currBeanName: ''
+// 	    		,currQueryStr: 'key01=val01&key02=val02'
 	//     		,coupon_code : ''
 	    	}
 	    }	
@@ -166,30 +169,64 @@
 		,methods: {
 			query: function(){
 				console.log("query");
-				this.sendReq("getResource");
+				this.sendReq("query");
 			},
 			insert: function(){
 				console.log("insert");
-				this.sendReq("insertResource");
+				this.sendReq("insert");
 			},
 			update: function(){
 				console.log("update");
-				this.sendReq("updateResource");
+				this.sendReq("update");
 			},
 			deleteBean: function(){
-				console.log("deleteBean");
-				this.sendReq("deleteResource");
+				console.log("delete");
+				this.sendReq("delete");
 			},
 			sendReq: function(action){
-				var url = url_g + action + "/" + this.action_name;
+				
+				// 更新currQueryStr
+				var queryStringAryJSON = $('#newform').serializeJSON();
+				console.log('queryStringAryJSON: ' , queryStringAryJSON);
+// 				var queryString = $('#newform').serialize();
+// 				var queryString = $("#newform :input[value!=''][value!='.']").serialize(); // if value is empty string, then skip it
+// 				var queryString = $("#newform :input[value!='']").serialize(); // if value is empty string, then skip it
+// 				var queryString = $('form :input[value!=""]').serialize(); // if value is empty string, then skip it
+				// ref: https://stackoverflow.com/questions/33559285/jquery-serialize-sends-default-values (warning: when user change the input value, html page will not change its default value for that input element)
+				var queryString = $('#newform').find(":input").filter(function () {
+										console.log("this.value: " , this.value);
+										return $.trim(this.value).length > 0
+									}).serialize(); // if value is empty string, then skip it
+// 				var queryString = $("#newform").find(":input[value]").serialize(); // if value is empty string, then skip it
+				console.log('queryString: ' , queryString);
+// 				var queryStringAry = $('#newform').serializeArray();
+// 				console.log('queryStringAry: ' , queryStringAry);
+// 				var formData = new FormData($('#newform'));
+// 				var myForm = document.getElementById('newform');
+// 				formData = new FormData(myForm);
+// 				var formData = new FormData($('#newform')[0]);
+// 				console.log('formData: ' , formData);
+// 				this.currQueryStr = queryString
+				
+				var url = url_g + '/' + 'crud' + '/' + this.currBeanName;
+				if ('query' == action){
+					url += '?'+ queryString;
+					var promise = $.get(url, function(data) {
+						console.log("success! " , data);
+						this.response = "" + JSON.stringify(data);
+					}.bind(this), "json");
+				}else if ('insert' == action){
+					
+				}else if ('update' == action){
+					
+				}else if ('delete' == action){
+					// exception
+					url = url_g + '/' + 'crud' + '/' + 'delete' + '/' + this.currBeanName;
+					
+				}
+				
 				console.log("url: " , url);
-				console.log("formParams: " , this.formParams);
-				console.log("sql[this.action_name]: " , sql[this.action_name]);
-				// 先到這邊
-				var promise = $.post(url, JSON.parse(this.formParams), function(data) {
-					console.log("success! " , data);
-					this.response = "" + JSON.stringify(data);
-				}.bind(this), "json");
+				console.log("this.currQueryStr: " , this.currQueryStr);
 // 				var promise = $.post(url, this.formParams);
 
 				// Assign handlers immediately after making the request,
@@ -246,32 +283,29 @@
 					console.log( "finished: ", data );
 				});
 			}
-			,getCurrBeanName: function(e){
-				console.log('getCurrBeanName e: ' , e);
-				console.log('getCurrBeanName e.target.value: ' , e.target.value);
+			,createForm: function(e){
+				console.log('createForm e: ' , e);
+				console.log('createForm e.target.value: ' , e.target.value);
 				
+				// update current selected bean name
+				this.currBeanName = e.target.value;
+				
+				// 建立 param form
 				let beanParamList = this.beanFieldsMap[e.target.value];
-				console.log('getCurrBeanName beanParamList: ' , beanParamList);
-				
-				// 建立 param清單
-// 				var Str="<input selected value='default' disabled>請選擇</option>";
+				console.log('createForm beanParamList: ' , beanParamList);
 				
 				var Str = '';
 				jQuery.each( beanParamList, function( index, val ) {
 					Str+= '<div class="form-group">'
 					console.log("index: " , index, " val: " , val);
-// 					Str+="<option value='" + key + "'>" + key + "</option>";
 					Str+= '<label class="control-label" for="' + val + '">' + val + '</label>'
-					Str+= '<input type="text" name="' + val + '" id="' + val + '" class="form-control">'
+					Str+= '<input type="text" name="' + val + '" id="' + val + '" value="" class="form-control">'
 					Str+= '</div>';
 				});
 				console.log('Str: ' , Str);
 				$("#newform").html(Str); 
 				
-				// 更新currQueryStr
-				var queryString = $('#newform').serialize();
-				console.log('queryString: ' , queryString);
-				this.currQueryStr = queryString
+
 				
 				
 			}
