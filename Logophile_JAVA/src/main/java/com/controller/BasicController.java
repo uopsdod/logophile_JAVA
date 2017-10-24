@@ -39,4 +39,10 @@ public class BasicController {
 		return "main_page";
 	}
     
+	@RequestMapping("/simu_crud_page")
+	public String simu_crud_page(Map<String, String> model) {
+		model.put("message", "hello");
+		return "bean_crud";
+	}
+	
 }

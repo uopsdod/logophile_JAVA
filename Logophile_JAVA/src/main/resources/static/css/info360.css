@@ -1,0 +1,986 @@
+
+/* lodding時隱藏 */
+[v-cloak] {
+  display: none;
+}
+
+.info360SettingPageWarrper{
+	padding:15px;
+}
+
+.info360ColorPickerModal .modal-content{
+	 width: 45%;
+	 position: relative;
+	 margin: auto;
+}
+
+/* Menu範本CSS */
+
+/* 左側選單 */
+.tabs-left {
+	border-bottom: none;
+	padding-top: 2px;
+	padding: 0px;
+/* 	border: 1px solid; */
+	height: 450px;
+}
+.tabs-left>li, .tabs-right>li {
+	float: none;
+	margin-bottom: 2px;
+}
+
+.tabs-left>li {
+	margin-right: -1px;
+}
+
+.tabs-left>li.active>a, .tabs-left>li.active>a:hover, .tabs-left>li.active>a:focus
+{
+	border-bottom-color: #ddd;
+	border-right-color: transparent;
+}
+
+.menuTite, .tabs-left>li>a {
+	border-radius: 4px 0 0 4px;
+	margin-right: 0;
+	display: block;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	font-weight: 100;
+}
+.tabs-left>li>a:focus, .tabs-left>li>a:hover {
+	text-decoration: none;
+	background-color: #ddd;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover
+{
+	color: #337ab7;
+	background-color: #fff;
+}
+/* 中間清單 */
+.single {
+	padding: 30px 15px;
+	background: #fff;
+}
+
+.single h3.side-title {
+	margin: 0;
+	margin-bottom: 10px;
+	padding: 0;
+	font-size: 20px;
+	color: #333;
+	text-transform: uppercase;
+}
+
+.single h3.side-title:after {
+	content: '';
+	width: 60px;
+	height: 1px;
+	background: #1c84c6;
+	display: block;
+	margin-top: 6px;
+}
+
+.single ul {
+	margin-bottom: 0;
+}
+
+.single li a {
+	color: #666;
+	font-size: 14px;
+	border-bottom: 1px solid #f0f0f0;
+	line-height: 40px;
+	display: block;
+	text-decoration: none;
+}
+
+.single li a:hover {
+	color: #ff173c;
+}
+
+.single li:last-child a {
+	border-bottom: 0;
+}
+
+/* 工具css */
+.matchParrent {
+	height: 100%;
+	width: 100%;
+}
+
+.footerLine {
+	position: absolute;
+	bottom: 10px;
+}
+
+.abContain {
+	position: absolute;
+}
+
+
+/* Menu範本END */
+.info360Tab {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.info360Tab > li {
+  position: relative;
+  display: block;
+}
+.info360Tab > li > a {
+  position: relative;
+  display: block;
+  padding: 5px 10px;
+}
+.info360Tab > li > a:hover,
+.info360Tab > li > a:focus {
+  text-decoration: none;
+  background-color: #eee;
+}
+.info360Tab > li.disabled > a {
+  color: #777;
+}
+.info360Tab > li.disabled > a:hover,
+.info360Tab > li.disabled > a:focus {
+  color: #777;
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+.info360Tab .open > a,
+.info360Tab .open > a:hover,
+.info360Tab .open > a:focus {
+  background-color: #eee;
+  border-color: #337ab7;
+}
+.info360Tab .info360Tab-divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.info360Tab > li > a > img {
+  max-width: none;
+}
+.info360Tab-tabs {
+  border-bottom: 1px solid #ddd;
+}
+.info360Tab-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+.info360Tab-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+/*   border-radius: 4px 4px 0 0; */
+}
+.info360Tab-tabs > li > a:hover {
+  border-color: #eee #eee #ddd;
+}
+.info360Tab-tabs > li.active > a,
+.info360Tab-tabs > li.active > a:hover,
+.info360Tab-tabs > li.active > a:focus {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+.info360Tab-tabs.info360Tab-justified {
+  width: 100%;
+  border-bottom: 0;
+}
+.info360Tab-tabs.info360Tab-justified > li {
+  float: none;
+}
+.info360Tab-tabs.info360Tab-justified > li > a {
+  margin-bottom: 5px;
+  text-align: center;
+}
+.info360Tab-tabs.info360Tab-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto;
+}
+@media (min-width: 768px) {
+  .info360Tab-tabs.info360Tab-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+  .info360Tab-tabs.info360Tab-justified > li > a {
+    margin-bottom: 0;
+  }
+}
+.nav-tabs.nav-justified > li > a {
+  margin-right: 0;
+  border-radius: 4px;
+}
+.info360Tab-tabs.info360Tab-justified > .active > a,
+.info360Tab-tabs.info360Tab-justified > .active > a:hover,
+.info360Tab-tabs.info360Tab-justified > .active > a:focus {
+  border: 1px solid #ddd;
+}
+@media (min-width: 768px) {
+  .info360Tab-tabs.info360Tab-justified > li > a {
+    border-bottom: 1px solid #ddd;
+/*     border-radius: 4px 4px 0 0; */
+  }
+  .info360Tab-tabs.info360Tab-justified > .active > a,
+  .info360Tab-tabs.info360Tab-justified > .active > a:hover,
+  .info360Tab-tabs.info360Tab-justified > .active > a:focus {
+    border-bottom-color: #fff;
+  }
+}
+.info360Tab-pills > li {
+  float: left;
+}
+.info360Tab-pills > li > a {
+  border-radius: 6px 6px 0 0;
+  border: 1px solid #e2e2e2;
+}
+.nav-pills > li + li {
+  margin-left: 2px;
+}
+.info360Tab-pills > li.active > a,
+.info360Tab-pills > li.active > a:hover,
+.info360Tab-pills > li.active > a:focus {
+  color: #fff;
+  background-color: #337ab7;
+}
+
+
+
+
+
+
+
+/* 色輪 */
+.farbtastic {
+    position: relative;
+     bottom: 40px;
+}
+.farbtastic * {
+    position: absolute;
+    cursor: crosshair;
+}
+.farbtastic, .farbtastic .wheel {
+    width: 195px;
+    height: 195px;
+}
+.farbtastic .color, .farbtastic .overlay {
+    top: 47px;
+    left: 47px;
+    width: 101px;
+    height: 101px;
+}
+.farbtastic .wheel {
+    background: url(http://i46.tinypic.com/1zpp009.png) no-repeat;
+    width: 195px;
+    height: 195px;
+}
+.farbtastic .overlay {
+    background: url(http://i49.tinypic.com/28uk8y9.png) no-repeat;
+}
+.farbtastic .marker {
+    width: 17px;
+    height: 17px;
+    margin: -8px 0 0 -8px;
+    overflow: hidden;
+    background: url(http://i45.tinypic.com/dzjx1w.png) no-repeat;
+}
+/* 文字大小 */
+.info360title{
+
+	font-size:13px!important;
+	font-weight: 200;
+	color:#676a6c;
+}
+
+/* btn外框,背景,字型,字的顏色 */
+.info360-btn-default{
+	padding:6px 10px;
+    background-color: #fff;
+    color: #3a3a3a;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    font-weight: bold;
+    border: 1.5px solid #d1d1d1;
+    border-radius: 10px;
+        position: relative;
+}
+
+/* pilot外框,背景,字型,字的顏色 */
+.info360-pilot-Ready{
+	padding:6px 10px;
+    background-color: #fff;
+    color: #3a3a3a;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    font-weight: bold;
+    border: 1.5px solid #46be8a;
+    border-radius: 10px;
+    position: relative;
+    margin-left:3px;
+}
+.info360-pilot-Notready{
+	padding:6px 10px;
+    background-color: #fff;
+    color: #3a3a3a;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    font-weight: bold;
+    border: 1.5px solid #f96868;
+    border-radius: 10px;
+    position: relative;
+    margin-left:3px;
+}
+.info360-pilot-Wait{
+	padding:6px 10px;
+    background-color: #fff;
+    color: #3a3a3a;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    font-weight: bold;
+    border: 1.5px solid #f2a654;
+    border-radius: 10px;
+    position: relative;
+    margin-left:3px;
+}
+
+
+
+
+/* btn外框,背景,字型,字的顏色 */
+.info360-btn-default_run{
+	padding:0px 10px;
+    background-color: #fff;
+    color: #3a3a3a;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    font-weight: bold;
+/*     border: 1.5px solid #d1d1d1; */
+    border-radius: 10px;
+        position: relative;
+}
+
+/* pilot外框,背景,字型,字的顏色 */
+.info360-pilot-Ready_run{
+	padding:0px 4px;
+    background-color: #fff;
+    color: #3a3a3a;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    font-weight: bold;
+    border: 1.5px solid #46be8a;
+    border-radius: 10px;
+    position: relative;
+    margin-left:3px;
+}
+.info360-pilot-Notready_run{
+	padding:0px 4px;
+    background-color: #fff;
+    color: #3a3a3a;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    font-weight: bold;
+    border: 1.5px solid #f96868;
+    border-radius: 10px;
+    position: relative;
+    margin-left:3px;
+}
+.info360-pilot-Wait_run{
+	padding:0px 4px;
+    background-color: #fff;
+    color: #3a3a3a;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    font-weight: bold;
+    border: 1.5px solid #f2a654;
+    border-radius: 10px;
+    position: relative;
+    margin-left:3px;
+}
+
+
+/* btn使用iconton */
+.addicon:before{
+	content: "\f067";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.finishServiceicon:before{
+	content: "\f1d9";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+
+.deleteicon:before{
+	content: "\f014";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.searchicon:before{
+	content: "\f002";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.switchicon:before{
+	content: "\f0ec";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.saveicon:before{
+	content: "\f0c7";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.computericon:before{
+	content: "\f26c";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.cancleicon:before{
+	content: "\f00d";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.comfirmicon:before{
+	content: "\f00c";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.banicon:before{
+	content: "\f05e";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+
+.lockicon:before{
+	content: "\f13e";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.enableicon:before{
+	content: "\f1ae";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.colorPickericon:before{
+	content: "\f1fb";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.codeicon:before{
+	content: "\f121";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.copyicon:before{
+	content: "\f0c5";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+.phoneicon:before{
+	content: "\f095";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+	padding-right: 5px;
+	
+}
+
+.infoicon:before{
+	content: "\f05a";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+color: #e2e2e2;
+    font-size: 10em; 
+	padding-right: 5px;
+	
+}
+
+.redirecticon:before{
+	content: "\f045";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+    
+	padding-right: 5px;
+	
+}
+
+.noticeicon:before{
+	content: "\f05a";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+    
+	padding-right: 5px;
+	
+}
+
+
+.siteicon:before{
+	content: "\f108";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+    
+	padding-right: 5px;
+	
+}
+.rootitemicon:before{
+	content: "\f0ca";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+    
+	padding-right: 5px;
+	
+}
+.subitemicon:before{
+	content: "\f0cb";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+    
+	padding-right: 5px;
+	
+}
+.editicon:before{
+	content: "\f044";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+/*     color: #000; */
+/*     font-size: 18px; */
+/*     padding-right: 0.5em; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     left: 0; */
+    
+	padding-right: 5px;
+	
+}
+/* settingPageTitleicon */
+
+
+.JSGenicon:before{
+	content: "\f1c9";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+.activityCodeicon:before{
+	content: "\f02c";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+.commlinkicon:before{
+	content: "\f08e";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.contactDataTableicon:before{
+	content: "\f1c0";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.personicon:before{
+	content: "\f007";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.groupicon:before{
+	content: "\f0c0";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.agentStatusicon:before{
+	content: "\f024";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.systemCfgicon:before{
+	content: "\f085";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.skillicon:before{
+	content: "\f1ac";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.entityTypeIcon:before{
+	content: "\f0c9";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.productCategoryCodeIcon:before{
+	content: "\f00b";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+.caseCommetTemplateManagementIcon:before{
+	content: "\f0ea";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+.callLogTagIcon:before{
+	content: "\f198";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+
+/* .randomIcon:before{ */
+/* 	content: "\f074"; */
+/* 	font-family: FontAwesome; */
+/*     font-style: normal; */
+/*     font-weight: normal; */
+/*     text-decoration: inherit; */
+/* 	padding-right: 5px; */
+	
+/* } */
+
+.randomIcon:before{
+	content: "\f074";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.shareIcon:before{
+	content: "\f064";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.shareIcon:before{
+	content: "\f064";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+.smileIcon:before{
+	content: "\f118";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
+
+.angleDoubleRightIcon:before{
+	content: "\f101";
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+	padding-right: 5px;
+	
+}
