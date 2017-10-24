@@ -186,7 +186,11 @@
 			sendReq: function(action){
 				
 				// prepare queryString form query
-				var queryStringJSON = $('#newform').serializeJSON();
+// 				var queryStringJSON = $('#newform').serializeJSON();
+				var queryStringJSON =$('#newform').find(":input").filter(function () {
+											console.log("this.value: " , this.value);
+											return $.trim(this.value).length > 0
+										}).serializeJSON();
 				console.log('queryStringJSON: ' , queryStringJSON);
 				// ref: https://stackoverflow.com/questions/33559285/jquery-serialize-sends-default-values (warning: when user change the input value, html page will not change its default value for that input element)
 				var queryString = $('#newform').find(":input").filter(function () {
@@ -203,10 +207,10 @@
 						this.response = "" + JSON.stringify(data);
 					}.bind(this), "json");
 				}else if ('insert' == action){
-// 					var promise = $.post(url, queryStringJSON, function(data) {
-// 						console.log("success! " , data);
-// 						this.response = "" + JSON.stringify(data);
-// 					}.bind(this), "json");					
+					var promise = $.post(url, queryStringJSON, function(data) {
+						console.log("success! " , data);
+						this.response = "" + JSON.stringify(data);
+					}.bind(this), "json");					
 				}else if ('update' == action){
 					
 				}else if ('delete' == action){
