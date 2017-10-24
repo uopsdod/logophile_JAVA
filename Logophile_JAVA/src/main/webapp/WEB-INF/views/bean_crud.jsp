@@ -206,13 +206,36 @@
 						console.log("success! " , data);
 						this.response = "" + JSON.stringify(data);
 					}.bind(this), "json");
+					
+					promise.fail(function(data) {
+						console.log( "error: ", data );
+					})
+					
 				}else if ('insert' == action){
 					var promise = $.post(url, queryStringJSON, function(data) {
 						console.log("success! " , data);
 						this.response = "" + JSON.stringify(data);
-					}.bind(this), "json");					
-				}else if ('update' == action){
+					}.bind(this), "json");
 					
+					promise.fail(function(data) {
+						console.log( "error: ", data );
+					})
+					
+				}else if ('update' == action){
+					var self = this;
+					$.ajax({
+					    url: url,
+					    type: 'PUT',
+					    data: queryStringJSON,
+					    success: function(data) {
+							console.log("success! " , data);
+							self.response = "" + JSON.stringify(data);
+						},
+					    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+					        alert("Status: " + textStatus); 
+					        alert("Error: " + errorThrown); 
+					    }
+					});
 				}else if ('delete' == action){
 					// exception
 					url = url_g + '/' + 'crud' + '/' + 'delete' + '/' + this.currBeanName;
@@ -228,15 +251,17 @@
 // 				var jqxhr = $.post( "example.php", function() {
 // 				  alert( "success" );
 // 				})
-				promise.done(function(data) {
-					console.log( "second success: ", data );
-				})
-				promise.fail(function(data) {
-					console.log( "error: ", data );
-				})
-				promise.always(function(data) {
-					console.log( "finished: ", data );
-				});
+	
+	
+// 				promise.done(function(data) {
+// 					console.log( "second success: ", data );
+// 				})
+// 				promise.fail(function(data) {
+// 					console.log( "error: ", data );
+// 				})
+// 				promise.always(function(data) {
+// 					console.log( "finished: ", data );
+// 				});
 				 
 				// Perform other work here ...
 				 
