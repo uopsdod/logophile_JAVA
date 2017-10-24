@@ -135,10 +135,10 @@
 					</form>
 				</div>			
 				<div class="col-sm-1 panel panel-default">
-					<button @click="query" type="button" class="btn info360-btn-default" data-dismiss="modal"> QUERY </button>
-					<button @click="insert" type="button" class="btn info360-btn-default" data-dismiss="modal"> INSERT </button>
-					<button @click="update" type="button" class="btn info360-btn-default" data-dismiss="modal"> UPDATE </button>
-					<button @click="deleteBean" type="button" class="btn info360-btn-default" data-dismiss="modal"> DELETE </button>
+					<button @click="sendReq('query')" type="button" class="btn info360-btn-default" data-dismiss="modal"> QUERY </button>
+					<button @click="sendReq('insert')" type="button" class="btn info360-btn-default" data-dismiss="modal"> INSERT </button>
+					<button @click="sendReq('update')" type="button" class="btn info360-btn-default" data-dismiss="modal"> UPDATE </button>
+					<button @click="sendReq('delete')" type="button" class="btn info360-btn-default" data-dismiss="modal"> DELETE </button>
 				</div>			
 				<div class="col-sm-5 panel panel-default">
 					<span>result</span>
@@ -167,22 +167,6 @@
 			
 		}
 		,methods: {
-			query: function(){
-				console.log("query");
-				this.sendReq("query");
-			},
-			insert: function(){
-				console.log("insert");
-				this.sendReq("insert");
-			},
-			update: function(){
-				console.log("update");
-				this.sendReq("update");
-			},
-			deleteBean: function(){
-				console.log("delete");
-				this.sendReq("delete");
-			},
 			sendReq: function(action){
 				
 				// prepare queryString form query
@@ -252,32 +236,8 @@
 				
 				console.log("url: " , url);
 				console.log("this.currQueryStr: " , this.currQueryStr);
-// 				var promise = $.post(url, this.formParams);
-
-				// Assign handlers immediately after making the request,
-				// and remember the jqxhr object for this request
-// 				var jqxhr = $.post( "example.php", function() {
-// 				  alert( "success" );
-// 				})
-	
-	
-// 				promise.done(function(data) {
-// 					console.log( "second success: ", data );
-// 				})
-// 				promise.fail(function(data) {
-// 					console.log( "error: ", data );
-// 				})
-// 				promise.always(function(data) {
-// 					console.log( "finished: ", data );
-// 				});
-				 
-				// Perform other work here ...
-				 
-				// Set another completion function for the request above
-// 				jqxhr.always(function() {
-// 				  alert( "second finished" );
-// 				});
-        	}
+        	} // end of sendReq
+			
 			,updateBeanFieldsMap: function(){
 				console.log("updateBeanFieldsMap method called");
 				var url = url_g + "/" + "getBeanFieldsMap";
@@ -309,7 +269,7 @@
 				promise.always(function(data) {
 					console.log( "finished: ", data );
 				});
-			}
+			} // end of updateBeanFieldsMap
 			,createForm: function(e){
 				console.log('createForm e: ' , e);
 				console.log('createForm e.target.value: ' , e.target.value);
@@ -331,11 +291,7 @@
 				});
 				console.log('Str: ' , Str);
 				$("#newform").html(Str); 
-				
-
-				
-				
-			}
+			}// end of createForm
 		}
 	});
 
