@@ -185,28 +185,15 @@
 			},
 			sendReq: function(action){
 				
-				// 更新currQueryStr
+				// prepare queryString form query
 				var queryStringAryJSON = $('#newform').serializeJSON();
 				console.log('queryStringAryJSON: ' , queryStringAryJSON);
-// 				var queryString = $('#newform').serialize();
-// 				var queryString = $("#newform :input[value!=''][value!='.']").serialize(); // if value is empty string, then skip it
-// 				var queryString = $("#newform :input[value!='']").serialize(); // if value is empty string, then skip it
-// 				var queryString = $('form :input[value!=""]').serialize(); // if value is empty string, then skip it
 				// ref: https://stackoverflow.com/questions/33559285/jquery-serialize-sends-default-values (warning: when user change the input value, html page will not change its default value for that input element)
 				var queryString = $('#newform').find(":input").filter(function () {
 										console.log("this.value: " , this.value);
 										return $.trim(this.value).length > 0
 									}).serialize(); // if value is empty string, then skip it
-// 				var queryString = $("#newform").find(":input[value]").serialize(); // if value is empty string, then skip it
 				console.log('queryString: ' , queryString);
-// 				var queryStringAry = $('#newform').serializeArray();
-// 				console.log('queryStringAry: ' , queryStringAry);
-// 				var formData = new FormData($('#newform'));
-// 				var myForm = document.getElementById('newform');
-// 				formData = new FormData(myForm);
-// 				var formData = new FormData($('#newform')[0]);
-// 				console.log('formData: ' , formData);
-// 				this.currQueryStr = queryString
 				
 				var url = url_g + '/' + 'crud' + '/' + this.currBeanName;
 				if ('query' == action){
