@@ -223,6 +223,7 @@
 					
 				}else if ('update' == action){
 					var self = this;
+					// ref: https://stackoverflow.com/questions/2153917/how-to-send-a-put-delete-request-in-jquery
 					$.ajax({
 					    url: url,
 					    type: 'PUT',
@@ -239,7 +240,14 @@
 				}else if ('delete' == action){
 					// exception
 					url = url_g + '/' + 'crud' + '/' + 'delete' + '/' + this.currBeanName;
+					var promise = $.post(url, queryStringJSON, function(data) {
+						console.log("success! " , data);
+						this.response = "" + JSON.stringify(data);
+					}.bind(this), "json");
 					
+					promise.fail(function(data) {
+						console.log( "error: ", data );
+					})
 				}
 				
 				console.log("url: " , url);
