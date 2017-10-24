@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class QuizGp extends Common{
+public class QuizGp extends Common<QuizGp>{
 
 	// Why should not use the AUTO JPA GenerationType with MySQL and Hibernate:
     // https://vladmihalcea.com/2017/01/24/why-should-not-use-the-auto-jpa-generationtype-with-mysql-and-hibernate/
