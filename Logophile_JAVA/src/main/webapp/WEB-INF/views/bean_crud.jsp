@@ -157,7 +157,7 @@
 	    } // end of data
 		,mounted:function(){
 			console.log("this.my_parent.userID_agent: " + this.my_parent.userID_agent); // debug
-			this.formParams = sql[this.action_name];
+// 			this.formParams = sql[this.action_name];
 			
 			// update beanFieldsMap
 			this.updateBeanFieldsMap();

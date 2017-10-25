@@ -15,6 +15,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -63,6 +65,15 @@ public class Util {
 	}
 	public static String getGString(JsonObject aObj, String aKey){
 		return (aObj.get(aKey) != null && !(aObj.get(aKey)instanceof JsonNull))?aObj.get(aKey).getAsString():null;
+	}
+	public static JsonArray getGJsonArray(String aMsg) {
+		JsonArray msgJson = null;
+		JsonParser jsonParser = new JsonParser();
+		JsonElement parse = jsonParser.parse(aMsg);
+		if (parse.isJsonArray()){
+			msgJson = parse.getAsJsonArray();
+		}
+		return msgJson;
 	}
 	public static Logger getFileLogger(){
 		return Attr.fileLogger;

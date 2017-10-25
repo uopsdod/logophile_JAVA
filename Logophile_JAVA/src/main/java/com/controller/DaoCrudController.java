@@ -2,6 +2,8 @@ package com.controller;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,13 +11,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.model.Sql2oDao;
 import com.model.Sql2oDaoUtil;
 import com.util.Util;
@@ -25,6 +36,9 @@ public class DaoCrudController {
 	
     @Autowired
     Sql2oDao sql2oDao;
+    
+    @Autowired
+    Sql2o sql2o;
 	
 	// great example to follow: GET_ALL, GET, POST, PUT, DELTE_ALL, DELTE
 	// ref: http://websystique.com/spring-boot/spring-boot-rest-api-example/
@@ -169,44 +183,55 @@ public class DaoCrudController {
 	
 //	@POST
 //	@Consumes("application/x-www-form-urlencoded")
-//	@Path("/batchInsertResource/{beanName}")
+//	@Path("/batchInsert/{beanName}")
 //	@Produces(MediaType.APPLICATION_JSON)
-//	public Response batchInsertResource(@PathParam("beanName") String beanName, @FormParam("beanList") String beanList) {
-//		Util.getFileLogger().info("batchInsertResource input starts");
-//		Util.getFileLogger().info("batchInsertResource input beanName: " + beanName);
-//		Util.getFileLogger().info("batchInsertResource input beanList: " + beanList);
-//		Util.getConsoleLogger().info("batchInsertResource input starts");
-//		Util.getConsoleLogger().info("batchInsertResource input beanName: " + beanName);
-//		Util.getConsoleLogger().info("batchInsertResource input beanList: " + beanList);
-//		
-//		JSONObject jsonObj = new JSONObject();
-//		List<String> primaryKeyList = new ArrayList<>();
-//		
-//		JsonArray gJsonArray = Util.getGJsonArray(beanList);
-//		
-//		try(Connection con = Info360Dao.sql2oForAll.beginTransaction()){
-//			for (JsonElement jsonElmt : gJsonArray) {
-//			    JsonObject paymentObj = jsonElmt.getAsJsonObject();
-//			    Type type = new TypeToken<Map<String, String>>(){}.getType();
-//			    Map<String, String> myMap = Util.getGson().fromJson(paymentObj, type);
-//			    
-//			    /** 拿取bean **/
-//				Object formParamsObj = convertObjToBean(beanName, myMap);
-//				
-//				/** 進行sql insert搜尋 **/
-//				String primaryKey = Sql2oDao.insert(formParamsObj, con);
-//				primaryKeyList.add(primaryKey);
-//				
-//				/** 放入回傳值 **/
-//				jsonObj.put("primaryKeyList", primaryKeyList);
-//			}			
-//			con.commit();
-//		}catch(Exception e){
-//			Util.getConsoleLogger().info("batchInsertResource Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
-//			Util.getFileLogger().info("batchInsertResource Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
-//		}
-//		
-//		Util.getFileLogger().info("batchInsertResource input ends");
+	@RequestMapping(value = "/crud/batch/{beanName}", method = RequestMethod.POST)
+	public ResponseEntity<String> batchInsert(@PathVariable("beanName") String beanName
+											,@RequestParam(value="beanList", required=true) String beanList
+//											,@RequestParam String beanList
+											){
+//	public Response batchInsert(@PathParam("beanName") String beanName, @FormParam("beanList") String beanList) {
+		Util.getFileLogger().info("batchInsert input starts");
+		Util.getFileLogger().info("batchInsert input beanName: " + beanName);
+		Util.getFileLogger().info("batchInsert input beanList: " + beanList);
+		Util.getConsoleLogger().info("batchInsert input starts");
+		Util.getConsoleLogger().info("batchInsert input beanName: " + beanName);
+		Util.getConsoleLogger().info("batchInsert input beanList: " + beanList);
+		
+		JSONObject jsonObj = new JSONObject();
+		List<String> primaryKeyList = new ArrayList<>();
+		
+		JsonArray gJsonArray = Util.getGJsonArray(beanList);
+		
+		try(Connection con =  this.sql2o.beginTransaction()){
+			for (JsonElement jsonElmt : gJsonArray) {
+			    JsonObject paymentObj = jsonElmt.getAsJsonObject();
+			    Type type = new TypeToken<Map<String, String>>(){}.getType();
+			    Map<String, String> myMap = Util.getGson().fromJson(paymentObj, type);
+			    
+			    /** 拿取bean **/
+				Object formParamsObj = convertObjToBean(beanName, myMap);
+				
+				/** 進行sql insert搜尋 **/
+				String primaryKey = sql2oDao.insert(formParamsObj, con);
+				primaryKeyList.add(primaryKey);
+				
+				/** 放入回傳值 **/
+				jsonObj.put("primaryKeyList", primaryKeyList);
+			}			
+			con.commit();
+		}catch(Exception e){
+			Util.getConsoleLogger().info("batchInsert Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
+			Util.getFileLogger().info("batchInsert Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
+		}
+		
+		Util.getFileLogger().info("batchInsert input ends");
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+		return ResponseEntity.created(location)
+							.contentType(MediaType.APPLICATION_JSON_UTF8) // specify we intend to return json format
+							.body(jsonObj.toString())
+							;
 //		return Response
 //				.status(200)
 //				.entity(jsonObj.toString())
@@ -215,10 +240,10 @@ public class DaoCrudController {
 //						"POST, GET, PUT, UPDATE, OPTIONS")
 //						.header("Access-Control-Allow-Headers",
 //								"Content-Type, Accept, X-Requested-With").build();
-//	}
-//	/** data輸入範例:  
-//	 * beanList:[{callID: "#1209oskvajoasi", senderID:"100", recevierID:"wad12saocijawd", action:"login", tenantID:"9"},{callID: "9doiwj12ds", senderID:"200", recevierID:"12oascij209", action:"findagent", tenantID:"10"}]
-//	 */
+	}
+	/** data輸入範例:  
+	 * beanList:[{callID: "#1209oskvajoasi", senderID:"100", recevierID:"wad12saocijawd", action:"login", tenantID:"9"},{callID: "9doiwj12ds", senderID:"200", recevierID:"12oascij209", action:"findagent", tenantID:"10"}]
+	 */
 		
 	
 	
