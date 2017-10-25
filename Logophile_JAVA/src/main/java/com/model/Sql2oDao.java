@@ -326,6 +326,9 @@ public class Sql2oDao {
 	public <T> int delete(T aObj){
 		return delete(aObj.getClass().getSimpleName(), aObj);
 	}
+	public <T> int delete(T aObj, Connection aCon){
+		return delete(aCon, aObj.getClass().getSimpleName(), aObj);
+	}
 	
 	public <T> int delete(String aTableName, T aObj){
 		int result = 0;

@@ -6,6 +6,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -190,33 +191,16 @@ public class DaoCrudController {
 		Util.getConsoleLogger().info("batchInsert input beanName: " + beanName);
 		Util.getConsoleLogger().info("batchInsert input beanList: " + beanList);
 		
-		JSONObject jsonObj = new JSONObject();
-		List<String> primaryKeyList = new ArrayList<>();
+		JsonObject jsonObj = new JsonObject();
 		
-		JsonArray gJsonArray = Util.getGJsonArray(beanList);
+		/** execute batch operation **/
+		List<Object> resultList = crudBatchHelper(beanName, beanList, "insert");
+		Util.getConsoleLogger().info("resultList: " + resultList);
 		
-		try(Connection con =  this.sql2o.beginTransaction()){
-			for (JsonElement jsonElmt : gJsonArray) {
-			    JsonObject paymentObj = jsonElmt.getAsJsonObject();
-			    Type type = new TypeToken<Map<String, String>>(){}.getType();
-			    Map<String, String> myMap = Util.getGson().fromJson(paymentObj, type);
-			    
-			    /** 拿取bean **/
-				Object formParamsObj = convertObjToBean(beanName, myMap);
-				
-				/** 進行sql insert搜尋 **/
-				String primaryKey = sql2oDao.insert(formParamsObj, con);
-				primaryKeyList.add(primaryKey);
-				
-				/** 放入回傳值 **/
-				jsonObj.put("primaryKeyList", primaryKeyList);
-			}			
-			con.commit();
-		}catch(Exception e){
-			Util.getConsoleLogger().info("batchInsert Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
-			Util.getFileLogger().info("batchInsert Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
-		}
-		
+		/** 放入回傳值 **/
+		Type listType = new TypeToken<List<String>>() {}.getType();
+		JsonElement primaryKeyListJson = Util.getGson().toJsonTree(resultList, listType);
+		jsonObj.add("primaryKeyList", primaryKeyListJson);
 		Util.getFileLogger().info("batchInsert input ends");
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
@@ -230,6 +214,79 @@ public class DaoCrudController {
 	 * Content-Type : application/x-www-form-urlencoded
 	 * beanList:[{spell: "w1"},{spell: "w2"}]
 	 */
+	
+	@RequestMapping(value = "/crud/batch/delete/{beanName}", method = RequestMethod.POST)
+	public ResponseEntity<String> batchDelete(@PathVariable("beanName") String beanName
+											,@RequestParam(value="beanList", required=true) String beanList
+											){
+		Util.getFileLogger().info("batchDelete input starts");
+		Util.getFileLogger().info("batchDelete input beanName: " + beanName);
+		Util.getFileLogger().info("batchDelete input beanList: " + beanList);
+		Util.getConsoleLogger().info("batchDelete input starts");
+		Util.getConsoleLogger().info("batchDelete input beanName: " + beanName);
+		Util.getConsoleLogger().info("batchDelete input beanList: " + beanList);
+		
+		JsonObject jsonObj = new JsonObject();
+		long delete_rows = 0;
+		
+		/** execute batch operation **/
+		List<Object> resultList = crudBatchHelper(beanName, beanList, "delete");
+		Util.getConsoleLogger().info("resultList: " + resultList);
+		delete_rows = resultList.stream().mapToInt(result -> Integer.parseInt(result.toString())).sum(); // ref: https://stackoverflow.com/questions/30125296/how-to-sum-a-list-of-integers-with-java-streams
+		
+		Util.getFileLogger().info("batchDelete input ends");
+		/** 放入回傳值 **/
+		jsonObj.addProperty("delete_rows", delete_rows);
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+		return ResponseEntity.created(location)
+							.contentType(MediaType.APPLICATION_JSON_UTF8) // specify we intend to return json format
+							.body(jsonObj.toString())
+							;
+	}
+	/** data輸入範例:  
+	 * url : http://localhost:8089/crud/batch/delete/Word
+	 * Content-Type : application/x-www-form-urlencoded
+	 * beanList:[{wordId: "1"},{wordId: "2"}]
+	 * @param action 
+	 */	
+	
+	private List<Object> crudBatchHelper(String beanName, String beanList, String action){
+		
+		List<Object> resultList = new ArrayList<>();
+		JsonArray gJsonArray = Util.getGJsonArray(beanList);
+		try(Connection con =  this.sql2o.beginTransaction()){
+			for (JsonElement jsonElmt : gJsonArray) {
+			    JsonObject paymentObj = jsonElmt.getAsJsonObject();
+			    Type type = new TypeToken<Map<String, String>>(){}.getType();
+			    Map<String, String> myMap = Util.getGson().fromJson(paymentObj, type);
+			    
+			    /** 拿取bean **/
+				Object formParamsObj = convertObjToBean(beanName, myMap);
+				
+				/** 進行sql insert搜尋 **/
+				Object result = null;
+				switch(action) {
+				case "insert":
+					result = sql2oDao.insert(formParamsObj, con);
+					resultList.add(result);
+					break;
+				case "delete":
+					result = sql2oDao.delete(formParamsObj, con);
+					resultList.add(result);
+					break;
+				}
+//				delete_rows += result;
+				
+			}			
+			con.commit();
+		}catch(Exception e){
+			Util.getConsoleLogger().info("batchDelete Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
+			Util.getFileLogger().info("batchDelete Util.getExceptionMsg(e): " + Util.getExceptionMsg(e));
+		}
+		
+		return resultList;
+	}
 		
 	
 	
