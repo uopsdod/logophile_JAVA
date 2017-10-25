@@ -179,18 +179,10 @@ public class DaoCrudController {
 //	}
 	
 	
-	
-	
-//	@POST
-//	@Consumes("application/x-www-form-urlencoded")
-//	@Path("/batchInsert/{beanName}")
-//	@Produces(MediaType.APPLICATION_JSON)
 	@RequestMapping(value = "/crud/batch/{beanName}", method = RequestMethod.POST)
 	public ResponseEntity<String> batchInsert(@PathVariable("beanName") String beanName
 											,@RequestParam(value="beanList", required=true) String beanList
-//											,@RequestParam String beanList
 											){
-//	public Response batchInsert(@PathParam("beanName") String beanName, @FormParam("beanList") String beanList) {
 		Util.getFileLogger().info("batchInsert input starts");
 		Util.getFileLogger().info("batchInsert input beanName: " + beanName);
 		Util.getFileLogger().info("batchInsert input beanList: " + beanList);
@@ -232,17 +224,11 @@ public class DaoCrudController {
 							.contentType(MediaType.APPLICATION_JSON_UTF8) // specify we intend to return json format
 							.body(jsonObj.toString())
 							;
-//		return Response
-//				.status(200)
-//				.entity(jsonObj.toString())
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Methods",
-//						"POST, GET, PUT, UPDATE, OPTIONS")
-//						.header("Access-Control-Allow-Headers",
-//								"Content-Type, Accept, X-Requested-With").build();
 	}
 	/** data輸入範例:  
-	 * beanList:[{callID: "#1209oskvajoasi", senderID:"100", recevierID:"wad12saocijawd", action:"login", tenantID:"9"},{callID: "9doiwj12ds", senderID:"200", recevierID:"12oascij209", action:"findagent", tenantID:"10"}]
+	 * url : http://localhost:8089/crud/batch/Word
+	 * Content-Type : application/x-www-form-urlencoded
+	 * beanList:[{spell: "w1"},{spell: "w2"}]
 	 */
 		
 	
