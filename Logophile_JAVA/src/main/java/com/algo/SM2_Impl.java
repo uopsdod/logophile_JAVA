@@ -3,7 +3,7 @@ package com.algo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 // ref: http://www.blueraja.com/blog/477/a-better-spaced-repetition-learning-algorithm-sm2
-public abstract class SM2_Impl {
+public class SM2_Impl {
 	private Double easiness = new Double(2.5);
 	private Double consecutiveCorrectAnswers = new Double(0);
 	private Double nextDueDate = new Double(0);

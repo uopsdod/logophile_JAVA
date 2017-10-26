@@ -5,7 +5,9 @@ import javax.persistence.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.algo.SM2_Impl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.model.annotation.FieldNotForDaoSql;
 import com.model.annotation.PrimaryKey;
 
 import java.util.Date;
@@ -29,7 +31,14 @@ public class Quiz extends Common<Quiz>{
     Long quizId;
     private String type; // QuizOneChoice
     
-    //@Temporal(TemporalType.DATE)
+    @FieldNotForDaoSql
+    @Transient
+    private SM2_Impl sm2 = new SM2_Impl(); // use DI in the future is suitable
+    
+    private Double nextDueDate = this.sm2.getNextDueDate();
+    
+
+	//@Temporal(TemporalType.DATE)
     //@Column(name = "CREATED_DATE")
     private Date createDate;
     
@@ -73,10 +82,6 @@ public class Quiz extends Common<Quiz>{
 		this.wordId = wordId;
 	}
 
-	public Quiz(Date createDate) {
-        this.createDate = createDate;
-    }
-
     public Quiz() {
     }
     
@@ -86,7 +91,14 @@ public class Quiz extends Common<Quiz>{
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-    
+    public Double getNextDueDate() {
+		return nextDueDate;
+	}
+
+	public void setNextDueDate(Double nextDueDate) {
+		this.nextDueDate = nextDueDate;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
