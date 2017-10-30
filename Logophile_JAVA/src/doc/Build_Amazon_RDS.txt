@@ -1,0 +1,52 @@
+
+* TO DO - create a new account - 
+* NEXT - http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html
+
+* STEP 01 - create IAM Administrator user
+* STEP 02 - create security group
+* STEP 03 - allow Administrator group users to view buget
+https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_billing.html?icmpid=docs_iam_console#tutorial-billing-step1
+
+* check billing:
+
+
+* tutorial:
+http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html
+
+
+* My Amazon Administrator Login URL:
+https://uopspop.signin.aws.amazon.com/console
+https://uopsdod.signin.aws.amazon.com/console
+
+* how to connect to db on Amazon:
+https://goo.gl/4W8ni4
+
+* notes:
+You must therefore add rules to a security group that enable you to connect to your DB instance.
+
+The security group you need to create is a VPC security group
+
+* Things you can learn
+** optimize MySql LEFT JOIN query clause:
+https://dev.mysql.com/doc/refman/5.5/en/left-join-optimization.html
+** Best practive on Amazon RDS
+https://www.youtube.com/watch?v=9-7azhB27So (56:52)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+
+
+
+* 下載網路字典發音:
+https://chrome.google.com/webstore/search/%E4%B8%8B%E8%BC%89%E7%B6%B2%E8%B7%AF%E5%AD%97%E5%85%B8%E7%99%BC%E9%9F%B3
+
+* 
+-- Home
+-- 新增單字
+-- 新增測驗集
+--- 新增測驗
+-- Login/Logout
+
+* UI 可視化布局
+** bochi: http://www.bootcss.com/p/layoutit/
+** bochi(English):http://www.layoutit.com/build/
+** 易企秀教學-https://www.youtube.com/watch?v=Shm8chvx6pU
+** 易企秀官網-http://www.eqxiu.com/
+** 兔展-http://www.rabbitpre.com/
+
+* UI:
+** Login template: https://www.w3schools.com/w3css/w3css_demo.asp
+** page template: https://www.w3schools.com/w3css/w3css_examples.asp
+
+** 管理介面:
+*** http://www.admui.com/demo
+
+** 參考一: https://www.w3schools.com/w3css/tryw3css_templates_portfolio2.htm#
+*** 簡約,左側功能欄
+
+** 參考二: https://www.w3schools.com/w3css/tryw3css_templates_webpage.htm#
+*** 超基本款
+
+** 參考三: https://www.w3schools.com/w3css/tryw3css_templates_clothing_store.htm#
+*** 左側手風琴功能列
+
+** 參考一 - Login: https://html5up.net/identity
+*** 有social media 登入頁面 
+
+** 參考一 - style: https://html5up.net/editorial
+*** 橘色
+
+** 參考二 - style: https://html5up.net/striped
+*** 皮革質料 酒紅 + 暗藍
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
